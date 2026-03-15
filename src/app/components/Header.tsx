@@ -29,7 +29,7 @@ export function Header() {
             <img src={logo} alt="Mother Care Pre-School" className="h-14 w-14" />
             <div className="hidden sm:block">
               <div className="font-bold text-lg text-[#0047FF]">Mother Care Pre-School</div>
-              <div className="text-xs text-gray-600 italic">Learn With Fun To Turn</div>
+              <div className="text-xs text-gray-600 italic">Learn With Fun-To-Turn</div>
             </div>
           </Link>
 
