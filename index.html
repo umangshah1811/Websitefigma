@@ -1,15 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mother Care Pre-School | Best Pre-School in Surat</title>
+    <meta name="description" content="Mother Care Pre-School – Best Pre-School in Surat offering Playgroup, Nursery, Junior KG and Senior KG programs. 15+ years of excellence in Early Childhood Education in Jahangir Pura, Surat, Gujarat." />
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Review attached file and logo</title>
-    </head>
+    <!-- LocalBusiness Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Preschool",
+      "name": "Mother Care Pre-School",
+      "url": "https://www.mothercaresurat.in",
+      "telephone": "+918866023444",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "108, Green Aristo Road, Canal Road, Jahangir Pura",
+        "addressLocality": "Surat",
+        "addressRegion": "Gujarat",
+        "postalCode": "395005",
+        "addressCountry": "IN"
+      },
+      "openingHours": ["Mo-Sa 08:00-14:00"]
+    }
+    </script>
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+    <!-- OpeningHoursSpecification Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Preschool",
+      "name": "Mother Care Pre-School",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "08:00",
+          "closes": "14:00"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Review / AggregateRating Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Mother Care Pre-School",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "3"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {"@type": "Person", "name": "Priya Mehta"},
+          "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+          "reviewBody": "The nursery curriculum at Mother Care helped my daughter build confidence and social skills from day one. Best Pre-School in Surat for early childhood education!"
+        },
+        {
+          "@type": "Review",
+          "author": {"@type": "Person", "name": "Rajesh Patel"},
+          "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+          "reviewBody": "Enrolling our son in the Playgroup program was the best decision. The teachers are nurturing, and the holistic development approach is evident every day."
+        },
+        {
+          "@type": "Review",
+          "author": {"@type": "Person", "name": "Sneha Shah"},
+          "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+          "reviewBody": "Mother Care Pre-School in Jahangir Pura offers a safe, loving environment. The Jr. KG curriculum prepared my child beautifully for primary school."
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
