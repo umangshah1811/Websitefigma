@@ -13,8 +13,8 @@ import {
   X,
   ArrowLeft,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
+import logo from "../../../assets/logo.png";
 
 const heroImage = "https://images.unsplash.com/photo-1761208663763-c4d30657c910?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMHByZXNjaG9vbCUyMGNoaWxkcmVuJTIwY2xhc3Nyb29tfGVufDF8fHx8MTc3MzUwMzMyN3ww&ixlib=rb-4.1.0&q=80&w=1080";
 const kidsPlaying = "https://images.unsplash.com/photo-1633219664515-2441564d0cc4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxraW5kZXJnYXJ0ZW4lMjBraWRzJTIwcGxheWluZyUyMGxlYXJuaW5nfGVufDF8fHx8MTc3MzUwMzcwN3ww&ixlib=rb-4.1.0&q=80&w=1080";
@@ -23,16 +23,15 @@ const artClass = "https://images.unsplash.com/photo-1630077852169-3900cc6f4f37?c
 const playground = "https://images.unsplash.com/photo-1771169204750-3b1b20d98053?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxraWRzJTIwb3V0ZG9vciUyMHBsYXlncm91bmQlMjBhY3Rpdml0aWVzfGVufDF8fHx8MTc3MzUwMzcwOHww&ixlib=rb-4.1.0&q=80&w=1080";
 const circleTime = "https://images.unsplash.com/photo-1587706419216-8845bd1fefd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVzY2hvb2wlMjBjaGlsZHJlbiUyMGNpcmNsZSUyMHRpbWV8ZW58MXx8fHwxNzczNTAzNzA4fDA&ixlib=rb-4.1.0&q=80&w=1080";
 
-/* ── Floating animation ── */
 const floatStyle = `
 @keyframes floatUp {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-7px); }
+  50%       { transform: translateY(-7px); }
 }
 .float-icon { animation: floatUp 3s ease-in-out infinite; }
 `;
 
-/* ── Count-up hook ── */
+/* ── Count-up ── */
 function useCountUp(target: number, duration = 1500) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -92,73 +91,28 @@ function useSlideIn() {
   return { ref, visible };
 }
 
-/* ── Daily schedule: single left icon only ── */
 const dailySchedule = [
-  {
-    time: "8:00 AM – 9:00 AM",
-    activity: "Arrival & Free Play",
-    leftEmoji: "🌅",   // rising sun
-    bg: "from-orange-50 to-yellow-50",
-    border: "border-orange-200",
-    details: ["Greeting circle", "Free-choice play stations", "Social warm-up activities"],
-  },
-  {
-    time: "9:00 AM – 10:00 AM",
-    activity: "Circle Time & Learning",
-    leftEmoji: "📖",   // open book
-    bg: "from-blue-50 to-indigo-50",
-    border: "border-blue-200",
-    details: ["Alphabet & number recognition", "Show-and-tell sessions", "Interactive story reading"],
-  },
-  {
-    time: "10:00 AM – 11:00 AM",
-    activity: "Creative Activities",
-    leftEmoji: "🎨",   // palette
-    bg: "from-pink-50 to-rose-50",
-    border: "border-pink-200",
-    details: ["Finger painting", "Building blocks & clay modeling", "Craft projects"],
-  },
-  {
-    time: "11:00 AM – 12:00 PM",
-    activity: "Outdoor Play",
-    leftEmoji: "🌳",   // tree
-    bg: "from-green-50 to-emerald-50",
-    border: "border-green-200",
-    details: ["Playground exploration", "Group sports & games", "Nature observation walks"],
-  },
-  {
-    time: "12:00 PM – 1:00 PM",
-    activity: "Snack & Rest Time",
-    leftEmoji: "🍎",   // apple
-    bg: "from-amber-50 to-yellow-50",
-    border: "border-amber-200",
-    details: ["Nutritious snack break", "Quiet rest / nap time", "Breathing & relaxation exercises"],
-  },
-  {
-    time: "1:00 PM – 2:00 PM",
-    activity: "Story Time & Music",
-    leftEmoji: "🎵",   // musical note
-    bg: "from-purple-50 to-violet-50",
-    border: "border-purple-200",
-    details: ["Rhymes & sing-alongs", "Guided storytelling", "Music & movement activities"],
-  },
+  { time: "8:00 AM \u2013 9:00 AM",  activity: "Arrival & Free Play",      leftEmoji: "\uD83C\uDF05", bg: "from-orange-50 to-yellow-50", border: "border-orange-200", details: ["Greeting circle", "Free-choice play stations", "Social warm-up activities"] },
+  { time: "9:00 AM \u2013 10:00 AM", activity: "Circle Time & Learning",    leftEmoji: "\uD83D\uDCD6", bg: "from-blue-50 to-indigo-50",   border: "border-blue-200",   details: ["Alphabet & number recognition", "Show-and-tell sessions", "Interactive story reading"] },
+  { time: "10:00 AM \u2013 11:00 AM",activity: "Creative Activities",       leftEmoji: "\uD83C\uDFA8", bg: "from-pink-50 to-rose-50",    border: "border-pink-200",   details: ["Finger painting", "Building blocks & clay modeling", "Craft projects"] },
+  { time: "11:00 AM \u2013 12:00 PM",activity: "Outdoor Play",              leftEmoji: "\uD83C\uDF33", bg: "from-green-50 to-emerald-50",border: "border-green-200",  details: ["Playground exploration", "Group sports & games", "Nature observation walks"] },
+  { time: "12:00 PM \u2013 1:00 PM", activity: "Snack & Rest Time",         leftEmoji: "\uD83C\uDF4E", bg: "from-amber-50 to-yellow-50", border: "border-amber-200",  details: ["Nutritious snack break", "Quiet rest / nap time", "Breathing & relaxation exercises"] },
+  { time: "1:00 PM \u2013 2:00 PM",  activity: "Story Time & Music",        leftEmoji: "\uD83C\uDFB5", bg: "from-purple-50 to-violet-50",border: "border-purple-200", details: ["Rhymes & sing-alongs", "Guided storytelling", "Music & movement activities"] },
 ];
 
-/* ── SEO gallery ── */
 const galleryImages = [
-  { src: kidsPlaying,    alt: "Best Playgroup in Surat – Children learning through play at Mother Care Pre-School",                       caption: "Best Playgroup in Surat",                       ariaLabel: "Playgroup children playing and learning at Mother Care Pre-School Surat" },
-  { src: teacherReading, alt: "Nursery Classroom Activities Surat – Teacher reading with children at Mother Care Pre-School",              caption: "Nursery Classroom Activities Surat",              ariaLabel: "Nursery classroom reading activity at Mother Care Pre-School Surat" },
-  { src: artClass,       alt: "Mother Care Pre-School Student Life – Art and creative expression class in Surat",                          caption: "Mother Care Pre-School Student Life",             ariaLabel: "Art class student life at Mother Care Pre-School Surat" },
-  { src: playground,     alt: "Holistic Early Childhood Education Gujarat – Outdoor play and physical development Surat",                  caption: "Holistic Early Childhood Education Gujarat",     ariaLabel: "Outdoor playground holistic education at Mother Care Pre-School Gujarat" },
-  { src: circleTime,     alt: "Mother Care Pre-School Student Life – Circle time group learning activity Surat",                          caption: "Circle Time – Group Learning",                   ariaLabel: "Circle time group activity at Mother Care Pre-School Surat" },
-  { src: heroImage,      alt: "Best Playgroup in Surat – Happy preschool classroom at Mother Care Pre-School",                            caption: "Happy Classrooms – Mother Care Surat",           ariaLabel: "Happy classroom environment at Mother Care Pre-School Surat" },
+  { src: kidsPlaying,    alt: "Best Playgroup in Surat \u2013 Children learning through play at Mother Care Pre-School",                      caption: "Best Playgroup in Surat",                    ariaLabel: "Playgroup children playing at Mother Care Pre-School Surat" },
+  { src: teacherReading, alt: "Nursery Classroom Activities Surat \u2013 Teacher reading with children at Mother Care Pre-School",             caption: "Nursery Classroom Activities Surat",          ariaLabel: "Nursery classroom reading at Mother Care Pre-School Surat" },
+  { src: artClass,       alt: "Mother Care Pre-School Student Life \u2013 Art and creative expression class in Surat",                         caption: "Mother Care Pre-School Student Life",         ariaLabel: "Art class at Mother Care Pre-School Surat" },
+  { src: playground,     alt: "Holistic Early Childhood Education Gujarat \u2013 Outdoor play at Mother Care Pre-School Surat",                 caption: "Holistic Early Childhood Education Gujarat", ariaLabel: "Outdoor playground at Mother Care Pre-School Gujarat" },
+  { src: circleTime,     alt: "Mother Care Pre-School Student Life \u2013 Circle time group learning Surat",                                   caption: "Circle Time \u2013 Group Learning",               ariaLabel: "Circle time at Mother Care Pre-School Surat" },
+  { src: heroImage,      alt: "Best Playgroup in Surat \u2013 Happy preschool classroom at Mother Care Pre-School",                            caption: "Happy Classrooms \u2013 Mother Care Surat",       ariaLabel: "Happy classroom at Mother Care Pre-School Surat" },
 ];
 
-/* ── Review glow colors ── */
 const reviewGlows = [
-  "rgba(239,68,68,0.18)",   // Playgroup red
-  "rgba(59,130,246,0.18)",  // Nursery blue
-  "rgba(34,197,94,0.18)",   // Junior KG green
+  "rgba(239,68,68,0.18)",
+  "rgba(59,130,246,0.18)",
+  "rgba(34,197,94,0.18)",
 ];
 
 export function Home() {
@@ -168,30 +122,36 @@ export function Home() {
   const storyLeft = useSlideIn();
   const storyRight = useSlideIn();
 
-  /* ── Lightbox helpers – defined as plain functions to avoid stale closure ── */
+  /* Lightbox nav \u2013 functional updaters avoid stale closures */
   const lightboxPrev = () =>
-    setLightboxIndex((prev) => (prev === null ? null : (prev - 1 + galleryImages.length) % galleryImages.length));
+    setLightboxIndex((prev) =>
+      prev === null ? null : (prev - 1 + galleryImages.length) % galleryImages.length
+    );
   const lightboxNext = () =>
-    setLightboxIndex((prev) => (prev === null ? null : (prev + 1) % galleryImages.length));
+    setLightboxIndex((prev) =>
+      prev === null ? null : (prev + 1) % galleryImages.length
+    );
 
+  /* Programs: glow applied via inline style on hover to avoid Tailwind JIT purge issues */
   const programs = [
-    { id: "playgroup",  title: "Playgroup",  age: "1.5 - 2.5 years", description: "Introduction to social learning through play-based activities",            icon: Heart,    color: "bg-red-500",    glowColor: "rgba(239,68,68,0.22)" },
-    { id: "nursery",    title: "Nursery",    age: "2.5 - 3.5 years", description: "Building foundational skills through interactive learning",                 icon: BookOpen, color: "bg-blue-500",   glowColor: "rgba(59,130,246,0.22)" },
-    { id: "junior-kg",  title: "Junior KG",  age: "3.5 - 4.5 years", description: "Developing cognitive and motor skills with structured curriculum",          icon: Palette,  color: "bg-green-500",  glowColor: "rgba(34,197,94,0.22)" },
-    { id: "senior-kg",  title: "Senior KG",  age: "4.5 - 5.5 years", description: "Preparing for primary school with advanced learning concepts",               icon: Star,     color: "bg-yellow-500", glowColor: "rgba(234,179,8,0.22)" },
+    { id: "playgroup",  title: "Playgroup",  age: "1.5 - 2.5 years", description: "Introduction to social learning through play-based activities",   icon: Heart,       color: "bg-red-500",    glowColor: "rgba(239,68,68,0.22)" },
+    { id: "nursery",    title: "Nursery",    age: "2.5 - 3.5 years", description: "Building foundational skills through interactive learning",        icon: BookOpen,    color: "bg-blue-500",   glowColor: "rgba(59,130,246,0.22)" },
+    { id: "junior-kg",  title: "Junior KG",  age: "3.5 - 4.5 years", description: "Developing cognitive and motor skills with structured curriculum", icon: Palette,     color: "bg-green-500",  glowColor: "rgba(34,197,94,0.22)" },
+    { id: "senior-kg",  title: "Senior KG",  age: "4.5 - 5.5 years", description: "Preparing for primary school with advanced learning concepts",    icon: Star,        color: "bg-yellow-500", glowColor: "rgba(234,179,8,0.25)" },
   ];
+  const [hoveredProgram, setHoveredProgram] = useState<string | null>(null);
 
   const testimonials = [
-    { name: "Priya Mehta",  role: "Parent · Nursery",    text: "The nursery curriculum at Mother Care helped my daughter build confidence and social skills from day one. Best Pre-School in Surat for early childhood education!", rating: 5 },
-    { name: "Rajesh Patel", role: "Parent · Playgroup",  text: "Enrolling our son in the Playgroup program was the best decision. The teachers are nurturing, and the holistic development approach is evident every day.", rating: 5 },
-    { name: "Sneha Shah",   role: "Parent · Junior KG",  text: "Mother Care Pre-School in Jahangir Pura offers a safe, loving environment. The Jr. KG curriculum prepared my child beautifully for primary school.", rating: 5 },
+    { name: "Priya Mehta",  role: "Parent \u00b7 Nursery",   text: "The nursery curriculum at Mother Care helped my daughter build confidence and social skills from day one. Best Pre-School in Surat for early childhood education!", rating: 5 },
+    { name: "Rajesh Patel", role: "Parent \u00b7 Playgroup", text: "Enrolling our son in the Playgroup program was the best decision. The teachers are nurturing, and the holistic development approach is evident every day.", rating: 5 },
+    { name: "Sneha Shah",   role: "Parent \u00b7 Junior KG", text: "Mother Care Pre-School in Jahangir Pura offers a safe, loving environment. The Jr. KG curriculum prepared my child beautifully for primary school.", rating: 5 },
   ];
 
   const trustStats = [
-    { icon: Award,        rawValue: "15+",    label: "Years of Excellence" },
-    { icon: Users,        rawValue: "2000+",  label: "Students Educated" },
-    { icon: Shield,       rawValue: "100%",   label: "Safe Environment" },
-    { icon: GraduationCap,rawValue: "Expert", label: "Experienced Teachers" },
+    { icon: Award,         rawValue: "15+",    label: "Years of Excellence" },
+    { icon: Users,         rawValue: "2000+",  label: "Students Educated" },
+    { icon: Shield,        rawValue: "100%",   label: "Safe Environment" },
+    { icon: GraduationCap, rawValue: "Expert", label: "Experienced Teachers" },
   ];
 
   return (
@@ -204,7 +164,7 @@ export function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 bg-yellow-400 text-gray-900 px-4 py-2 rounded-full text-sm font-semibold">
-                <span className="bg-white text-yellow-500 rounded-full w-6 h-6 flex items-center justify-center shadow-sm text-xs">⭐</span>
+                <span className="bg-white text-yellow-500 rounded-full w-6 h-6 flex items-center justify-center shadow-sm text-xs">\u2b50</span>
                 15+ Years of Excellence in Early Education
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
@@ -215,7 +175,7 @@ export function Home() {
                 Join our family of 2000+ happy students and give your child the best start in life.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/admissions#tour" className="bg-[#FFCC00] text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-lg hover:shadow-xl text-center">📅 Book a School Tour</Link>
+                <Link to="/admissions#tour" className="bg-[#FFCC00] text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-lg hover:shadow-xl text-center">\uD83D\uDCC5 Book a School Tour</Link>
                 <Link to="/admissions" className="bg-[#0047FF] text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl text-center">Apply for Admission</Link>
               </div>
             </div>
@@ -242,7 +202,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* Programs */}
+      {/* Programs \u2013 hover glow via inline style (fixes Senior KG intermittent bug) */}
       <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -251,10 +211,19 @@ export function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {programs.map((p) => (
-              <Link key={p.id} to={`/programs/${p.id}`}
-                className="group bg-white rounded-2xl shadow-md transition-all duration-300 p-6 hover:-translate-y-2"
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 30px ${p.glowColor}`; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = ""; }}
+              <Link
+                key={p.id}
+                to={`/programs/${p.id}`}
+                className="group bg-white rounded-2xl shadow-md transition-all duration-300 p-6 hover:-translate-y-2 block"
+                style={{
+                  boxShadow: hoveredProgram === p.id
+                    ? `0 8px 32px 4px ${p.glowColor}, 0 2px 8px rgba(0,0,0,0.06)`
+                    : undefined,
+                  transform: hoveredProgram === p.id ? "translateY(-8px)" : undefined,
+                  transition: "box-shadow 0.3s ease, transform 0.3s ease",
+                }}
+                onMouseEnter={() => setHoveredProgram(p.id)}
+                onMouseLeave={() => setHoveredProgram(null)}
               >
                 <div className={`${p.color} text-white p-4 rounded-xl inline-block mb-4`}><p.icon size={32} /></div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{p.title}</h3>
@@ -267,7 +236,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ───── Daily Routine: single-column, LEFT icon only ───── */}
+      {/* Daily Routine \u2013 single left icon, hover-expand */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -276,7 +245,6 @@ export function Home() {
               Structured yet flexible daily routine designed for optimal learning and fun
             </p>
           </div>
-
           <div className="max-w-2xl mx-auto space-y-4">
             {dailySchedule.map((item, index) => {
               const isHovered = hoveredSchedule === index;
@@ -287,12 +255,9 @@ export function Home() {
                   onMouseEnter={() => setHoveredSchedule(index)}
                   onMouseLeave={() => setHoveredSchedule(null)}
                 >
-                  {/* Single left floating icon */}
                   <div className="flex flex-col items-center justify-start pt-4 w-14 flex-shrink-0">
                     <span className="text-4xl float-icon select-none" aria-hidden="true">{item.leftEmoji}</span>
                   </div>
-
-                  {/* Card */}
                   <div
                     className={`flex-1 border-2 ${item.border} bg-gradient-to-r ${item.bg} rounded-2xl px-5 py-4 transition-all duration-300 ${
                       isHovered ? "shadow-lg" : "shadow-sm"
@@ -300,8 +265,6 @@ export function Home() {
                   >
                     <div className="font-bold text-gray-900 text-base">{item.activity}</div>
                     <div className="text-sm text-slate-500 mt-0.5 mb-1">{item.time}</div>
-
-                    {/* Hover-expand details */}
                     <div
                       className="overflow-hidden transition-all duration-300"
                       style={{ maxHeight: isHovered ? "160px" : "0px", opacity: isHovered ? 1 : 0 }}
@@ -323,7 +286,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ───── Gallery with fixed lightbox navigation ───── */}
+      {/* Gallery with fixed lightbox */}
       <section className="py-16 bg-gradient-to-br from-yellow-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -334,6 +297,7 @@ export function Home() {
             {galleryImages.map((img, index) => (
               <button
                 key={index}
+                type="button"
                 onClick={() => setLightboxIndex(index)}
                 aria-label={img.ariaLabel}
                 className="relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow aspect-square group"
@@ -354,58 +318,39 @@ export function Home() {
           </div>
         </div>
 
-        {/* ── Lightbox: prev/next use functional updaters to avoid stale index ── */}
+        {/* Lightbox \u2013 functional updaters fix next-arrow bug */}
         {lightboxIndex !== null && (
           <div
             className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
             role="dialog"
             aria-label="Image lightbox"
           >
-            {/* Close */}
-            <button
-              onClick={() => setLightboxIndex(null)}
-              aria-label="Close lightbox"
-              className="absolute top-4 right-4 text-white bg-white/20 rounded-full p-2 hover:bg-white/40 transition z-10"
-            >
+            <button type="button" onClick={() => setLightboxIndex(null)} aria-label="Close lightbox"
+              className="absolute top-4 right-4 text-white bg-white/20 rounded-full p-2 hover:bg-white/40 transition z-10">
               <X size={24} />
             </button>
-
-            {/* Prev */}
-            <button
-              onClick={lightboxPrev}
-              aria-label="Previous image"
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-white/20 rounded-full p-3 hover:bg-white/40 transition z-10"
-            >
+            <button type="button" onClick={lightboxPrev} aria-label="Previous image"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-white/20 rounded-full p-3 hover:bg-white/40 transition z-10">
               <ArrowLeft size={24} />
             </button>
-
-            {/* Next */}
-            <button
-              onClick={lightboxNext}
-              aria-label="Next image"
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-white/20 rounded-full p-3 hover:bg-white/40 transition z-10"
-            >
+            <button type="button" onClick={lightboxNext} aria-label="Next image"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-white/20 rounded-full p-3 hover:bg-white/40 transition z-10">
               <ArrowRight size={24} />
             </button>
-
             <div className="max-w-4xl w-full">
               <img
                 src={galleryImages[lightboxIndex].src}
                 alt={galleryImages[lightboxIndex].alt}
                 className="w-full max-h-[80vh] object-contain rounded-2xl"
               />
-              <p className="text-white text-center mt-4 text-lg font-medium">
-                {galleryImages[lightboxIndex].caption}
-              </p>
-              <p className="text-gray-400 text-center text-sm mt-1">
-                {lightboxIndex + 1} / {galleryImages.length}
-              </p>
+              <p className="text-white text-center mt-4 text-lg font-medium">{galleryImages[lightboxIndex].caption}</p>
+              <p className="text-gray-400 text-center text-sm mt-1">{lightboxIndex + 1} / {galleryImages.length}</p>
             </div>
           </div>
         )}
       </section>
 
-      {/* ───── Reviews with sequential brand glows ───── */}
+      {/* Reviews with sequential brand glows */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -470,7 +415,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ───── Our Story ───── */}
+      {/* Our Story \u2013 logo to left of heading, Sparkles removed */}
       <section className="py-16 bg-amber-50/40">
         <div className="container mx-auto px-4">
           <div
@@ -480,11 +425,17 @@ export function Home() {
             }`}
           >
             <div className="lg:col-span-3 space-y-6">
-              {/* h2 + inline brand icon + h3 */}
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+                  {/* Grayscale low-opacity school logo to the LEFT of heading text */}
+                  <img
+                    src={logo}
+                    alt=""
+                    aria-hidden="true"
+                    className="w-10 h-10 object-contain rounded-full"
+                    style={{ filter: "grayscale(100%)", opacity: 0.35 }}
+                  />
                   Our Story
-                  <Sparkles size={22} className="text-[#0047FF] opacity-60" aria-hidden="true" />
                 </h2>
                 <h3 className="text-xl md:text-2xl font-bold text-[#0047FF]">15+ Years of Nurturing Bright Futures in Surat</h3>
               </div>
@@ -512,7 +463,7 @@ export function Home() {
               }`}
             >
               <div className="bg-blue-50 rounded-2xl min-h-64 flex items-center justify-center shadow-md overflow-hidden">
-                <img src={kidsPlaying} alt="Mother Care Pre-School campus Surat – Best Preschool in Gujarat" className="w-full h-64 object-cover rounded-2xl" />
+                <img src={kidsPlaying} alt="Mother Care Pre-School campus Surat \u2013 Best Preschool in Gujarat" className="w-full h-64 object-cover rounded-2xl" />
               </div>
             </div>
           </div>
@@ -525,7 +476,7 @@ export function Home() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Give Your Child the Best Start?</h2>
           <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">Join our family of happy learners. Schedule a tour to see our facilities and meet our caring staff.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/admissions#tour" className="bg-[#FFCC00] text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-lg hover:shadow-xl">📅 Book a School Tour</Link>
+            <Link to="/admissions#tour" className="bg-[#FFCC00] text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-lg hover:shadow-xl">\uD83D\uDCC5 Book a School Tour</Link>
             <Link to="/admissions" className="bg-white text-[#0047FF] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl">Apply for Admission</Link>
           </div>
         </div>
