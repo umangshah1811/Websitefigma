@@ -42,9 +42,9 @@ const floatStyle = `
 `;
 
 const storyStats = [
-  { icon: Trophy,    value: "15+",   label: "Years of Excellence",    sublabel: "Trusted Since 2009" },
-  { icon: GradCap,   value: "2,000+", label: "Happy Graduates",       sublabel: "Families Who Trust Us" },
-  { icon: Sparkles,  value: "98%",   label: "Parent Satisfaction",    sublabel: "Holistic Approach" },
+  { icon: Trophy,   value: "15+",    label: "Years of Excellence", sublabel: "Trusted Since 2009" },
+  { icon: GradCap,  value: "2,000+", label: "Happy Graduates",     sublabel: "Families Who Trust Us" },
+  { icon: Sparkles, value: "98%",    label: "Parent Satisfaction", sublabel: "Holistic Approach" },
 ];
 
 function useCountUp(target: number, duration = 1500) {
@@ -166,49 +166,49 @@ function useSlideIn() {
 
 const dailySchedule = [
   {
-    time: "8:00 AM \u2013 9:00 AM",
+    time: "8:00 AM – 9:00 AM",
     activity: "Arrival & Free Play",
-    leftEmoji: "\uD83C\uDF05",
+    leftEmoji: "🌅",
     bg: "from-orange-50 to-yellow-50",
     border: "border-orange-200",
     details: ["Greeting circle", "Free-choice play stations", "Social warm-up activities"],
   },
   {
-    time: "9:00 AM \u2013 10:00 AM",
+    time: "9:00 AM – 10:00 AM",
     activity: "Circle Time & Learning",
-    leftEmoji: "\uD83D\uDCD6",
+    leftEmoji: "📖",
     bg: "from-blue-50 to-indigo-50",
     border: "border-blue-200",
     details: ["Alphabet & number recognition", "Show-and-tell sessions", "Interactive story reading"],
   },
   {
-    time: "10:00 AM \u2013 11:00 AM",
+    time: "10:00 AM – 11:00 AM",
     activity: "Creative Activities",
-    leftEmoji: "\uD83C\uDFA8",
+    leftEmoji: "🎨",
     bg: "from-pink-50 to-rose-50",
     border: "border-pink-200",
     details: ["Finger painting", "Building blocks & clay modeling", "Craft projects"],
   },
   {
-    time: "11:00 AM \u2013 12:00 PM",
+    time: "11:00 AM – 12:00 PM",
     activity: "Outdoor Play",
-    leftEmoji: "\uD83C\uDF33",
+    leftEmoji: "🌳",
     bg: "from-green-50 to-emerald-50",
     border: "border-green-200",
     details: ["Playground exploration", "Group sports & games", "Nature observation walks"],
   },
   {
-    time: "12:00 PM \u2013 1:00 PM",
+    time: "12:00 PM – 1:00 PM",
     activity: "Snack & Rest Time",
-    leftEmoji: "\uD83C\uDF4E",
+    leftEmoji: "🍎",
     bg: "from-amber-50 to-yellow-50",
     border: "border-amber-200",
     details: ["Nutritious snack break", "Quiet rest / nap time", "Breathing & relaxation exercises"],
   },
   {
-    time: "1:00 PM \u2013 2:00 PM",
+    time: "1:00 PM – 2:00 PM",
     activity: "Story Time & Music",
-    leftEmoji: "\uD83C\uDFB5",
+    leftEmoji: "🎵",
     bg: "from-purple-50 to-violet-50",
     border: "border-purple-200",
     details: ["Rhymes & sing-alongs", "Guided storytelling", "Music & movement activities"],
@@ -218,38 +218,38 @@ const dailySchedule = [
 const galleryImages = [
   {
     src: kidsPlaying,
-    alt: "Best Playgroup in Surat \u2013 Children learning through play at Mother Care Pre-School",
+    alt: "Best Playgroup in Surat – Children learning through play at Mother Care Pre-School",
     caption: "Best Playgroup in Surat",
     ariaLabel: "Playgroup children playing at Mother Care Pre-School Surat",
   },
   {
     src: teacherReading,
-    alt: "Nursery Classroom Activities Surat \u2013 Teacher reading with children at Mother Care Pre-School",
+    alt: "Nursery Classroom Activities Surat – Teacher reading with children at Mother Care Pre-School",
     caption: "Nursery Classroom Activities Surat",
     ariaLabel: "Nursery classroom reading at Mother Care Pre-School Surat",
   },
   {
     src: artClass,
-    alt: "Mother Care Pre-School Student Life \u2013 Art and creative expression class in Surat",
+    alt: "Mother Care Pre-School Student Life – Art and creative expression class in Surat",
     caption: "Mother Care Pre-School Student Life",
     ariaLabel: "Art class at Mother Care Pre-School Surat",
   },
   {
     src: playground,
-    alt: "Holistic Early Childhood Education Gujarat \u2013 Outdoor play at Mother Care Pre-School Surat",
+    alt: "Holistic Early Childhood Education Gujarat – Outdoor play at Mother Care Pre-School Surat",
     caption: "Holistic Early Childhood Education Gujarat",
     ariaLabel: "Outdoor playground at Mother Care Pre-School Gujarat",
   },
   {
     src: circleTime,
-    alt: "Mother Care Pre-School Student Life \u2013 Circle time group learning Surat",
-    caption: "Circle Time \u2013 Group Learning",
+    alt: "Mother Care Pre-School Student Life – Circle time group learning Surat",
+    caption: "Circle Time – Group Learning",
     ariaLabel: "Circle time at Mother Care Pre-School Surat",
   },
   {
     src: heroImage,
-    alt: "Best Playgroup in Surat \u2013 Happy preschool classroom at Mother Care Pre-School",
-    caption: "Happy Classrooms \u2013 Mother Care Surat",
+    alt: "Best Playgroup in Surat – Happy preschool classroom at Mother Care Pre-School",
+    caption: "Happy Classrooms – Mother Care Surat",
     ariaLabel: "Happy classroom at Mother Care Pre-School Surat",
   },
 ];
@@ -323,19 +323,19 @@ export function Home() {
   const testimonials = [
     {
       name: "Priya Mehta",
-      role: "Parent \u00b7 Nursery",
+      role: "Parent · Nursery",
       text: "The nursery curriculum at Mother Care helped my daughter build confidence and social skills from day one. Best Pre-School in Surat for early childhood education!",
       rating: 5,
     },
     {
       name: "Rajesh Patel",
-      role: "Parent \u00b7 Playgroup",
+      role: "Parent · Playgroup",
       text: "Enrolling our son in the Playgroup program was the best decision. The teachers are nurturing, and the holistic development approach is evident every day.",
       rating: 5,
     },
     {
       name: "Sneha Shah",
-      role: "Parent \u00b7 Junior KG",
+      role: "Parent · Junior KG",
       text: "Mother Care Pre-School in Jahangir Pura offers a safe, loving environment. The Jr. KG curriculum prepared my child beautifully for primary school.",
       rating: 5,
     },
@@ -358,7 +358,9 @@ export function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 bg-yellow-400 text-gray-900 px-4 py-2 rounded-full text-sm font-semibold">
-                <span className="bg-white text-yellow-500 rounded-full w-6 h-6 flex items-center justify-center shadow-sm text-xs">\u2b50</span>
+                <span className="bg-white text-yellow-500 rounded-full w-6 h-6 flex items-center justify-center shadow-sm">
+                  <Star size={14} fill="currentColor" style={{ pointerEvents: "none" }} />
+                </span>
                 15+ Years of Excellence in Early Education
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
@@ -727,7 +729,7 @@ export function Home() {
               <div className="bg-blue-50 rounded-2xl min-h-64 flex items-center justify-center shadow-md overflow-hidden">
                 <img
                   src={kidsPlaying}
-                  alt="Mother Care Pre-School campus Surat \u2013 Best Preschool in Gujarat"
+                  alt="Mother Care Pre-School campus Surat – Best Preschool in Gujarat"
                   className="w-full h-64 object-cover rounded-2xl"
                 />
               </div>
