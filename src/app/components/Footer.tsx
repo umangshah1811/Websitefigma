@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import logo from "../../assets/logo.png";
 
-/* ── Live Open/Closed badge (IST) ── */
 function OpenNowBadge() {
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -36,7 +35,6 @@ function OpenNowBadge() {
 }
 
 export function Footer() {
-  /* Back to Top – hits all three scroll containers for cross-browser safety */
   const scrollToTop = () => {
     try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (_) {}
     try { document.documentElement.scrollTo({ top: 0, behavior: "smooth" }); } catch (_) {}
@@ -44,14 +42,14 @@ export function Footer() {
   };
 
   const quickLinks = [
-    { label: "Home",                  path: "/" },
-    { label: "About Our Pre-School",  path: "/about" },
-    { label: "Our Preschool Programs", path: "/programs" },
-    { label: "Admissions Process",    path: "/admissions" },
-    { label: "School Events",         path: "/events" },
-    { label: "Student Gallery",       path: "/gallery" },
-    { label: "School Blog",           path: "/blog" },
-    { label: "Contact Us",            path: "/contact" },
+    { label: "Home",                   path: "/" },
+    { label: "About Our Pre-School",   path: "/about" },
+    { label: "Our Preschool Programs",  path: "/programs" },
+    { label: "Admissions Process",     path: "/admissions" },
+    { label: "School Events",          path: "/events" },
+    { label: "Student Gallery",        path: "/gallery" },
+    { label: "School Blog",            path: "/blog" },
+    { label: "Contact Us",             path: "/contact" },
   ];
 
   const schedule = [
@@ -69,7 +67,7 @@ export function Footer() {
 
   return (
     <>
-      {/* ── Back to Top button ── */}
+      {/* Back to Top */}
       <button
         type="button"
         onClick={scrollToTop}
@@ -92,12 +90,11 @@ export function Footer() {
         </svg>
       </button>
 
-      {/* ── Unified 5-column white footer ── */}
       <footer className="bg-white text-gray-900 border-t-4 border-[#0047FF]">
         <div className="container mx-auto px-4 py-14">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
 
-            {/* Col 1 – Brand Bio */}
+            {/* Col 1 – Brand Bio with logo */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-4">
                 <img
@@ -113,7 +110,6 @@ export function Footer() {
               <p className="text-gray-600 text-sm mb-3 leading-relaxed">
                 Proudly serving families in Jahangirpura, Canal Road, Dandi, Jahangirabad and across Surat, Gujarat.
               </p>
-              {/* Address block – increased top margin for breathing room */}
               <address className="not-italic text-sm text-gray-600 space-y-2 mb-5 mt-5">
                 <div className="flex items-start gap-2">
                   <MapPin size={14} className="mt-0.5 flex-shrink-0 text-[#0047FF]" />
@@ -134,9 +130,8 @@ export function Footer() {
                 </div>
               </address>
 
-              {/* Brand-colour social icons */}
+              {/* Social icons */}
               <div className="flex gap-3">
-                {/* Facebook – official #1877F2 */}
                 <a
                   href="https://www.facebook.com/share/18Gv2HHf3B/"
                   target="_blank"
@@ -149,7 +144,6 @@ export function Footer() {
                     <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" />
                   </svg>
                 </a>
-                {/* Instagram – official gradient */}
                 <a
                   href="https://www.instagram.com/mothercaresurat"
                   target="_blank"
@@ -271,7 +265,6 @@ export function Footer() {
                   </a>
                 </li>
               </ul>
-              {/* Map iframe wrapped in directions link */}
               <a
                 href={mapsUrl}
                 target="_blank"
@@ -290,7 +283,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* CTA strip */}
+          {/* CTA strip – clean button text */}
           <div className="mt-10 bg-[#0047FF] rounded-2xl p-6 text-center">
             <h3 className="text-xl font-semibold text-white mb-2">Ready to Join Our Family?</h3>
             <p className="text-blue-100 mb-4">Schedule a tour and see our school in action!</p>
@@ -310,10 +303,10 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Legal – clean text, no trailing symbols */}
+          {/* Copyright – plain text, no symbol artifacts */}
           <div className="mt-6 border-t border-gray-200 pt-5 text-center">
             <p className="text-gray-500 text-sm">
-              &copy; 2026 Mother Care Pre-School. All rights reserved. Trusted by families in Surat for over 15 years | 2000+ Happy Students
+              Copyright 2026 Mother Care Pre-School. All rights reserved. Trusted by families in Surat for over 15 years | 2000+ Happy Students
             </p>
           </div>
         </div>

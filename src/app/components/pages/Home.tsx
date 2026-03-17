@@ -37,7 +37,6 @@ const floatStyle = `
 .float-icon { animation: floatUp 3s ease-in-out infinite; }
 `;
 
-/* ── Count-up hook ── */
 function useCountUp(target: number, duration = 1500) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -101,9 +100,7 @@ function useSlideIn() {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setVisible(true);
-      },
+      ([e]) => { if (e.isIntersecting) setVisible(true); },
       { threshold: 0.15 }
     );
     obs.observe(el);
@@ -216,7 +213,6 @@ export function Home() {
   const storyLeft = useSlideIn();
   const storyRight = useSlideIn();
 
-  /* ── Lightbox navigation: functional updaters guarantee fresh index ── */
   const lightboxPrev = () =>
     setLightboxIndex((prev) =>
       prev === null ? null : (prev - 1 + galleryImages.length) % galleryImages.length
@@ -226,7 +222,6 @@ export function Home() {
       prev === null ? null : (prev + 1) % galleryImages.length
     );
 
-  /* Programs – glow/lift fully via inline style (immune to Tailwind JIT purge) */
   const programs = [
     {
       id: "playgroup",
@@ -262,7 +257,6 @@ export function Home() {
       description: "Preparing for primary school with advanced learning concepts",
       icon: Star,
       color: "bg-yellow-500",
-      /* Yellow glow – slightly higher opacity to ensure visibility */
       glowColor: "rgba(234,179,8,0.30)",
     },
   ];
@@ -299,7 +293,7 @@ export function Home() {
     <div>
       <style>{floatStyle}</style>
 
-      {/* ── Hero ── */}
+      {/* Hero */}
       <section className="relative bg-gradient-to-br from-blue-50 to-yellow-50 overflow-hidden">
         <div className="container mx-auto px-4 py-16 lg:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -319,12 +313,12 @@ export function Home() {
                 family of 2000+ happy students and give your child the best start in life.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                {/* Clean button text – no unicode escape sequences */}
+                {/* Hero CTA – clean text, no emoji prefix */}
                 <Link
                   to="/admissions#tour"
                   className="bg-[#FFCC00] text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-lg hover:shadow-xl text-center"
                 >
-                  📅 Book a School Tour
+                  Book a School Tour
                 </Link>
                 <Link
                   to="/admissions"
@@ -354,7 +348,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── Stats ── */}
+      {/* Stats */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
@@ -365,7 +359,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── Programs ── */}
+      {/* Programs */}
       <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -406,7 +400,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── Daily Routine ── */}
+      {/* Daily Routine */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -462,7 +456,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── Gallery ── */}
+      {/* Gallery */}
       <section className="py-16 bg-gradient-to-br from-yellow-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -526,7 +520,6 @@ export function Home() {
             >
               <ArrowLeft size={24} />
             </button>
-            {/* Next arrow – functional updater ensures (prevIndex + 1) % length */}
             <button
               type="button"
               onClick={lightboxNext}
@@ -552,7 +545,7 @@ export function Home() {
         )}
       </section>
 
-      {/* ── Reviews ── */}
+      {/* Reviews */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -620,7 +613,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── Our Story ── */}
+      {/* Our Story – logo to left of heading */}
       <section className="py-16 bg-amber-50/40">
         <div className="container mx-auto px-4">
           <div
@@ -632,7 +625,7 @@ export function Home() {
             <div className="lg:col-span-3 space-y-6">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 flex items-center gap-3">
-                  {/* Actual school logo – grayscale + low opacity as brand accent */}
+                  {/* School logo – grayscale + low opacity brand accent */}
                   <img
                     src={logo}
                     alt=""
@@ -687,7 +680,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── Final CTA ── */}
+      {/* Final CTA – clean button text, no emoji */}
       <section className="py-16 bg-gradient-to-br from-[#0047FF] to-blue-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -702,7 +695,7 @@ export function Home() {
               to="/admissions#tour"
               className="bg-[#FFCC00] text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-lg hover:shadow-xl"
             >
-              📅 Book a School Tour
+              Book a School Tour
             </Link>
             <Link
               to="/admissions"
