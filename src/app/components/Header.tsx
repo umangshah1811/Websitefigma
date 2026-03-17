@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
-import { Menu, X } from "lucide-react";
+import { Menu, X, CalendarDays } from "lucide-react";
 import logo from "../../assets/logo.png";
 
 export function Header() {
@@ -59,12 +59,13 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* CTA */}
+          {/* Desktop CTA */}
           <div className="hidden lg:block">
             <Link
               to="/admissions#tour"
-              className="bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-md hover:shadow-lg"
+              className="inline-flex items-center gap-2 bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-md hover:shadow-lg"
             >
+              <CalendarDays size={16} style={{ pointerEvents: "none" }} />
               Book a School Tour
             </Link>
           </div>
@@ -107,8 +108,9 @@ export function Header() {
               <Link
                 to="/admissions#tour"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold text-center mt-2"
+                className="inline-flex items-center justify-center gap-2 bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold text-center mt-2"
               >
+                <CalendarDays size={16} style={{ pointerEvents: "none" }} />
                 Book a School Tour
               </Link>
             </nav>

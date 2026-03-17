@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, CalendarDays } from "lucide-react";
 import logo from "../../assets/logo.png";
 
 const mapsUrl =
@@ -39,14 +39,14 @@ export function Footer() {
   };
 
   const quickLinks = [
-    { label: "Home",                  path: "/" },
-    { label: "About Our Pre-School",  path: "/about" },
-    { label: "Our Preschool Programs", path: "/programs" },
-    { label: "Admissions Process",    path: "/admissions" },
-    { label: "School Events",         path: "/events" },
-    { label: "Student Gallery",       path: "/gallery" },
-    { label: "School Blog",           path: "/blog" },
-    { label: "Contact Us",            path: "/contact" },
+    { label: "Home",                   path: "/" },
+    { label: "About Our Pre-School",   path: "/about" },
+    { label: "Our Preschool Programs",  path: "/programs" },
+    { label: "Admissions Process",     path: "/admissions" },
+    { label: "School Events",          path: "/events" },
+    { label: "Student Gallery",        path: "/gallery" },
+    { label: "School Blog",            path: "/blog" },
+    { label: "Contact Us",             path: "/contact" },
   ];
 
   const schedule = [
@@ -164,44 +164,29 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Col 5 – Contact Us (all items are clickable hyperlinks) */}
+            {/* Col 5 – Contact Us */}
             <div>
               <h3 className="font-bold text-gray-900 mb-4">Contact Us</h3>
               <ul className="space-y-3 mb-4">
-                {/* Phone – tap to call */}
                 <li className="flex items-center gap-2 text-sm">
                   <Phone size={14} className="text-[#0047FF] flex-shrink-0" />
-                  <a
-                    href="tel:+918866023444"
-                    className="text-gray-600 hover:text-[#0047FF] transition-colors font-medium underline-offset-2 hover:underline"
-                  >
+                  <a href="tel:+918866023444" className="text-gray-600 hover:text-[#0047FF] transition-colors font-medium underline-offset-2 hover:underline">
                     +91 88660 23444
                   </a>
                 </li>
-                {/* Email – tap to open mail client */}
                 <li className="flex items-center gap-2 text-sm">
                   <Mail size={14} className="text-[#0047FF] flex-shrink-0" />
-                  <a
-                    href="mailto:info@mothercaresurat.in"
-                    className="text-gray-600 hover:text-[#0047FF] transition-colors underline-offset-2 hover:underline"
-                  >
+                  <a href="mailto:info@mothercaresurat.in" className="text-gray-600 hover:text-[#0047FF] transition-colors underline-offset-2 hover:underline">
                     info@mothercaresurat.in
                   </a>
                 </li>
-                {/* Address – tap for Google Maps directions */}
                 <li className="flex items-start gap-2 text-sm">
                   <MapPin size={14} className="text-[#0047FF] flex-shrink-0 mt-0.5" />
-                  <a
-                    href={mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-[#0047FF] transition-colors underline-offset-2 hover:underline"
-                  >
+                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#0047FF] transition-colors underline-offset-2 hover:underline">
                     108, Green Aristo Road, Canal Road, Jahangir Pura, Surat
                   </a>
                 </li>
               </ul>
-              {/* Embedded map – clicking opens directions */}
               <a
                 href={mapsUrl}
                 target="_blank"
@@ -224,7 +209,11 @@ export function Footer() {
             <h3 className="text-xl font-semibold text-white mb-2">Ready to Join Our Family?</h3>
             <p className="text-blue-100 mb-4">Schedule a tour and see our school in action!</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/admissions#tour" className="inline-flex items-center justify-center gap-2 bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-[#FFD633] transition-all">
+              <Link
+                to="/admissions#tour"
+                className="inline-flex items-center justify-center gap-2 bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-[#FFD633] transition-all"
+              >
+                <CalendarDays size={16} style={{ pointerEvents: "none" }} />
                 Book a School Tour
               </Link>
               <Link to="/admissions" className="bg-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition-all">
