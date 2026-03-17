@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import logo from "../../assets/logo.png";
 
+const mapsUrl =
+  "https://www.google.com/maps/dir/?api=1&destination=108+Green+Aristo+Road+Canal+Road+Jahangir+Pura+Surat+Gujarat+395005";
+
 function OpenNowBadge() {
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -24,11 +27,7 @@ function OpenNowBadge() {
         isOpen ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"
       }`}
     >
-      <span
-        className={`w-2 h-2 rounded-full flex-shrink-0 ${
-          isOpen ? "bg-green-500 animate-pulse" : "bg-gray-400"
-        }`}
-      />
+      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isOpen ? "bg-green-500 animate-pulse" : "bg-gray-400"}`} />
       {isOpen ? "Open Now" : "Currently Closed"}
     </span>
   );
@@ -40,14 +39,14 @@ export function Footer() {
   };
 
   const quickLinks = [
-    { label: "Home",                   path: "/" },
-    { label: "About Our Pre-School",   path: "/about" },
-    { label: "Our Preschool Programs",  path: "/programs" },
-    { label: "Admissions Process",     path: "/admissions" },
-    { label: "School Events",          path: "/events" },
-    { label: "Student Gallery",        path: "/gallery" },
-    { label: "School Blog",            path: "/blog" },
-    { label: "Contact Us",             path: "/contact" },
+    { label: "Home",                  path: "/" },
+    { label: "About Our Pre-School",  path: "/about" },
+    { label: "Our Preschool Programs", path: "/programs" },
+    { label: "Admissions Process",    path: "/admissions" },
+    { label: "School Events",         path: "/events" },
+    { label: "Student Gallery",       path: "/gallery" },
+    { label: "School Blog",           path: "/blog" },
+    { label: "Contact Us",            path: "/contact" },
   ];
 
   const schedule = [
@@ -60,9 +59,6 @@ export function Footer() {
     { day: "Sunday",    hours: "Closed" },
   ];
 
-  const mapsUrl =
-    "https://www.google.com/maps/dir/?api=1&destination=108+Green+Aristo+Road+Canal+Road+Jahangir+Pura+Surat+Gujarat+395005";
-
   return (
     <>
       {/* Back to Top */}
@@ -74,17 +70,10 @@ export function Footer() {
         className="fixed bottom-24 right-4 bg-[#0047FF] text-white p-3 rounded-full shadow-xl hover:bg-blue-700 active:scale-95 transition-all hover:scale-110"
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-          style={{ pointerEvents: "none" }}
+          xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" strokeWidth="2.5"
+          strokeLinecap="round" strokeLinejoin="round"
+          aria-hidden="true" style={{ pointerEvents: "none" }}
         >
           <polyline points="18 15 12 9 6 15" />
         </svg>
@@ -97,11 +86,7 @@ export function Footer() {
             {/* Col 1 – Brand Bio */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-4">
-                <img
-                  src={logo}
-                  alt="Mother Care Pre-School Logo"
-                  className="h-14 w-14 object-contain rounded-full flex-shrink-0"
-                />
+                <img src={logo} alt="Mother Care Pre-School Logo" className="h-14 w-14 object-contain rounded-full flex-shrink-0" />
                 <div>
                   <div className="font-bold text-base text-gray-900">Mother Care Pre-School</div>
                   <div className="text-xs text-gray-500 italic">Learn With Fun-To-Turn</div>
@@ -179,29 +164,56 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Col 5 – Contact + Map */}
+            {/* Col 5 – Contact Us (all items are clickable hyperlinks) */}
             <div>
               <h3 className="font-bold text-gray-900 mb-4">Contact Us</h3>
               <ul className="space-y-3 mb-4">
+                {/* Phone – tap to call */}
                 <li className="flex items-center gap-2 text-sm">
                   <Phone size={14} className="text-[#0047FF] flex-shrink-0" />
-                  <a href="tel:+918866023444" className="text-gray-600 hover:text-[#00C853] transition-colors font-medium">+91 88660 23444</a>
+                  <a
+                    href="tel:+918866023444"
+                    className="text-gray-600 hover:text-[#0047FF] transition-colors font-medium underline-offset-2 hover:underline"
+                  >
+                    +91 88660 23444
+                  </a>
                 </li>
+                {/* Email – tap to open mail client */}
                 <li className="flex items-center gap-2 text-sm">
                   <Mail size={14} className="text-[#0047FF] flex-shrink-0" />
-                  <a href="mailto:info@mothercaresurat.in" className="text-gray-600 hover:text-[#00C853] transition-colors">info@mothercaresurat.in</a>
+                  <a
+                    href="mailto:info@mothercaresurat.in"
+                    className="text-gray-600 hover:text-[#0047FF] transition-colors underline-offset-2 hover:underline"
+                  >
+                    info@mothercaresurat.in
+                  </a>
                 </li>
+                {/* Address – tap for Google Maps directions */}
                 <li className="flex items-start gap-2 text-sm">
                   <MapPin size={14} className="text-[#0047FF] flex-shrink-0 mt-0.5" />
-                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#00C853] transition-colors">108, Green Aristo Road, Canal Road, Jahangir Pura, Surat</a>
+                  <a
+                    href={mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-[#0047FF] transition-colors underline-offset-2 hover:underline"
+                  >
+                    108, Green Aristo Road, Canal Road, Jahangir Pura, Surat
+                  </a>
                 </li>
               </ul>
-              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="block rounded-[10px] overflow-hidden hover:opacity-90 transition-opacity">
+              {/* Embedded map – clicking opens directions */}
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-[10px] overflow-hidden hover:opacity-90 transition-opacity"
+                aria-label="Get directions to Mother Care Pre-School"
+              >
                 <iframe
                   src="https://maps.google.com/maps?q=Mother+Care+Pre-School+Surat&output=embed"
                   width="100%" height="130" loading="lazy"
                   title="Mother Care Pre-School location map"
-                  style={{ borderRadius: "10px", border: "1px solid #e2e8f0", display: "block" }}
+                  style={{ borderRadius: "10px", border: "1px solid #e2e8f0", display: "block", pointerEvents: "none" }}
                 />
               </a>
             </div>
@@ -212,14 +224,20 @@ export function Footer() {
             <h3 className="text-xl font-semibold text-white mb-2">Ready to Join Our Family?</h3>
             <p className="text-blue-100 mb-4">Schedule a tour and see our school in action!</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/admissions#tour" className="bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-[#FFD633] transition-all">Book a School Tour</Link>
-              <Link to="/admissions" className="bg-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition-all">Apply for Admission</Link>
+              <Link to="/admissions#tour" className="inline-flex items-center justify-center gap-2 bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-[#FFD633] transition-all">
+                Book a School Tour
+              </Link>
+              <Link to="/admissions" className="bg-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition-all">
+                Apply for Admission
+              </Link>
             </div>
           </div>
 
           {/* Copyright */}
           <div className="mt-6 border-t border-gray-200 pt-5 text-center">
-            <p className="text-gray-500 text-sm">Copyright 2026 Mother Care Pre-School. All rights reserved. Trusted by families in Surat for over 15 years | 2000+ Happy Students</p>
+            <p className="text-gray-500 text-sm">
+              Copyright 2026 Mother Care Pre-School. All rights reserved. Trusted by families in Surat for over 15 years | 2000+ Happy Students
+            </p>
           </div>
         </div>
       </footer>

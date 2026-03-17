@@ -13,6 +13,7 @@ import {
   X,
   ArrowLeft,
   ArrowRight,
+  CalendarDays,
 } from "lucide-react";
 import logo from "../../../assets/logo.png";
 
@@ -213,14 +214,18 @@ export function Home() {
   const storyLeft = useSlideIn();
   const storyRight = useSlideIn();
 
-  const lightboxPrev = () =>
+  const lightboxPrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setLightboxIndex((prev) =>
       prev === null ? null : (prev - 1 + galleryImages.length) % galleryImages.length
     );
-  const lightboxNext = () =>
+  };
+  const lightboxNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setLightboxIndex((prev) =>
       prev === null ? null : (prev + 1) % galleryImages.length
     );
+  };
 
   const programs = [
     {
@@ -299,9 +304,7 @@ export function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 bg-yellow-400 text-gray-900 px-4 py-2 rounded-full text-sm font-semibold">
-                <span className="bg-white text-yellow-500 rounded-full w-6 h-6 flex items-center justify-center shadow-sm text-xs">
-                  ⭐
-                </span>
+                <span className="bg-white text-yellow-500 rounded-full w-6 h-6 flex items-center justify-center shadow-sm text-xs">⭐</span>
                 15+ Years of Excellence in Early Education
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
@@ -313,16 +316,16 @@ export function Home() {
                 family of 2000+ happy students and give your child the best start in life.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                {/* Hero CTA – clean text, no emoji prefix */}
                 <Link
                   to="/admissions#tour"
-                  className="bg-[#FFCC00] text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-lg hover:shadow-xl text-center"
+                  className="inline-flex items-center justify-center gap-2 bg-[#FFCC00] text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-lg hover:shadow-xl"
                 >
+                  <CalendarDays size={18} style={{ pointerEvents: "none" }} />
                   Book a School Tour
                 </Link>
                 <Link
                   to="/admissions"
-                  className="bg-[#0047FF] text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl text-center"
+                  className="inline-flex items-center justify-center gap-2 bg-[#0047FF] text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl"
                 >
                   Apply for Admission
                 </Link>
@@ -404,9 +407,7 @@ export function Home() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              A Day At Our Pre-School
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">A Day At Our Pre-School</h2>
             <p className="text-base md:text-lg text-slate-600 font-medium max-w-2xl mx-auto">
               Structured yet flexible daily routine designed for optimal learning and fun
             </p>
@@ -422,9 +423,7 @@ export function Home() {
                   onMouseLeave={() => setHoveredSchedule(null)}
                 >
                   <div className="flex flex-col items-center justify-start pt-4 w-14 flex-shrink-0">
-                    <span className="text-4xl float-icon select-none" aria-hidden="true">
-                      {item.leftEmoji}
-                    </span>
+                    <span className="text-4xl float-icon select-none" aria-hidden="true">{item.leftEmoji}</span>
                   </div>
                   <div
                     className={`flex-1 border-2 ${item.border} bg-gradient-to-r ${
@@ -497,38 +496,49 @@ export function Home() {
           </div>
         </div>
 
-        {/* Lightbox */}
+        {/* Lightbox — overlay clicks close, nav buttons stop propagation */}
         {lightboxIndex !== null && (
           <div
-            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/90 z-[9998] flex items-center justify-center p-4"
             role="dialog"
             aria-label="Image lightbox"
+            onClick={() => setLightboxIndex(null)}
           >
+            {/* Close */}
             <button
               type="button"
-              onClick={() => setLightboxIndex(null)}
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}
               aria-label="Close lightbox"
-              className="absolute top-4 right-4 text-white bg-white/20 rounded-full p-2 hover:bg-white/40 transition z-10"
+              className="absolute top-4 right-4 text-white bg-white/20 rounded-full p-2 hover:bg-white/40 transition z-[9999]"
+              style={{ pointerEvents: "all" }}
             >
-              <X size={24} />
+              <X size={24} style={{ pointerEvents: "none" }} />
             </button>
+
+            {/* Prev */}
             <button
               type="button"
               onClick={lightboxPrev}
               aria-label="Previous image"
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-white/20 rounded-full p-3 hover:bg-white/40 transition z-10"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-white/20 rounded-full p-3 hover:bg-white/40 transition z-[9999]"
+              style={{ pointerEvents: "all" }}
             >
-              <ArrowLeft size={24} />
+              <ArrowLeft size={24} style={{ pointerEvents: "none" }} />
             </button>
+
+            {/* Next */}
             <button
               type="button"
               onClick={lightboxNext}
               aria-label="Next image"
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-white/20 rounded-full p-3 hover:bg-white/40 transition z-10"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-white/20 rounded-full p-3 hover:bg-white/40 transition z-[9999]"
+              style={{ pointerEvents: "all" }}
             >
-              <ArrowRight size={24} />
+              <ArrowRight size={24} style={{ pointerEvents: "none" }} />
             </button>
-            <div className="max-w-4xl w-full">
+
+            {/* Image — stop clicks from bubbling to overlay close */}
+            <div className="max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
               <img
                 src={galleryImages[lightboxIndex].src}
                 alt={galleryImages[lightboxIndex].alt}
@@ -613,7 +623,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* Our Story – logo to left of heading */}
+      {/* Our Story */}
       <section className="py-16 bg-amber-50/40">
         <div className="container mx-auto px-4">
           <div
@@ -625,13 +635,11 @@ export function Home() {
             <div className="lg:col-span-3 space-y-6">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 flex items-center gap-3">
-                  {/* School logo – grayscale + low opacity brand accent */}
+                  {/* Full-colour logo — no filter/opacity */}
                   <img
                     src={logo}
-                    alt=""
-                    aria-hidden="true"
-                    className="w-10 h-10 object-contain rounded-full flex-shrink-0"
-                    style={{ filter: "grayscale(100%)", opacity: 0.35 }}
+                    alt="Mother Care Pre-School Logo"
+                    className="w-12 h-12 object-contain rounded-full flex-shrink-0 shadow-sm"
                   />
                   Our Story
                 </h2>
@@ -680,26 +688,26 @@ export function Home() {
         </div>
       </section>
 
-      {/* Final CTA – clean button text, no emoji */}
+      {/* Final CTA */}
       <section className="py-16 bg-gradient-to-br from-[#0047FF] to-blue-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Give Your Child the Best Start?
           </h2>
           <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-            Join our family of happy learners. Schedule a tour to see our facilities and meet our caring
-            staff.
+            Join our family of happy learners. Schedule a tour to see our facilities and meet our caring staff.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/admissions#tour"
-              className="bg-[#FFCC00] text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-lg hover:shadow-xl"
+              className="inline-flex items-center justify-center gap-2 bg-[#FFCC00] text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-[#FFD633] transition-all shadow-lg hover:shadow-xl"
             >
+              <CalendarDays size={18} style={{ pointerEvents: "none" }} />
               Book a School Tour
             </Link>
             <Link
               to="/admissions"
-              className="bg-white text-[#0047FF] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
+              className="inline-flex items-center justify-center gap-2 bg-white text-[#0047FF] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
             >
               Apply for Admission
             </Link>
