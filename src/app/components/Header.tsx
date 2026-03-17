@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/New Logo.png";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -59,7 +59,7 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* CTA – clean text, no ghost characters */}
+          {/* CTA */}
           <div className="hidden lg:block">
             <Link
               to="/admissions#tour"

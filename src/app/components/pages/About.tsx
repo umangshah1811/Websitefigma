@@ -1,5 +1,6 @@
 import { Award, Users, Heart, Target, Shield, GraduationCap, BookOpen, Sparkles } from "lucide-react";
 import { Link } from "react-router";
+import logo from "../../../assets/New Logo.png";
 
 const teamImage = "https://images.unsplash.com/photo-1541802802036-1d572ba70147?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVzY2hvb2wlMjB0ZWFjaGVyJTIwY2hpbGRyZW4lMjByZWFkaW5nfGVufDF8fHx8MTc3MzUwMzcwN3ww&ixlib=rb-4.1.0&q=80&w=1080";
 const classroomImage = "https://images.unsplash.com/photo-1761208663763-c4d30657c910?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMHByZXNjaG9vbCUyMGNoaWxkcmVuJTIwY2xhc3Nyb29tfGVufDF8fHx8MTc3MzUwMzMyN3ww&ixlib=rb-4.1.0&q=80&w=1080";
@@ -58,7 +59,18 @@ export function About() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
+              {/* Our Story heading with logo */}
+              <div className="flex items-center gap-4 mb-6">
+                <img
+                  src={logo}
+                  alt="Mother Care Pre-School Logo"
+                  className="h-16 w-16 rounded-full object-contain flex-shrink-0 shadow-md"
+                />
+                <div>
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Our Story</h2>
+                  <p className="text-sm text-[#0047FF] font-semibold mt-0.5">15+ Years of Nurturing Bright Futures in Surat</p>
+                </div>
+              </div>
               <p className="text-lg text-gray-700 mb-4 leading-relaxed">
                 Mother Care Pre-School was established with a vision to create an educational
                 institution that prioritizes the holistic development of children. We believe

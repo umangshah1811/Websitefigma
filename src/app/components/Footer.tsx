@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/New Logo.png";
 
 function OpenNowBadge() {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,7 +65,7 @@ export function Footer() {
 
   return (
     <>
-      {/* Back to Top – z-[9999] so nothing can block it; onClick directly on <button> */}
+      {/* Back to Top – z-[9999] so nothing can block it */}
       <button
         type="button"
         onClick={scrollToTop}
