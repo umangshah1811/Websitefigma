@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import logo from "../../assets/logo.png";
 
 export function Header() {
@@ -10,23 +10,28 @@ export function Header() {
   const isActive = (path: string) => location.pathname === path;
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
-    { name: "Programs", path: "/programs" },
-    { name: "Admissions", path: "/admissions" },
-    { name: "Events", path: "/events" },
-    { name: "Gallery", path: "/gallery" },
-    { name: "Blog", path: "/blog" },
-    { name: "Contact", path: "/contact" },
+    { name: "Home",        path: "/" },
+    { name: "About Us",    path: "/about" },
+    { name: "Programs",    path: "/programs" },
+    { name: "Admissions",  path: "/admissions" },
+    { name: "Events",      path: "/events" },
+    { name: "Gallery",     path: "/gallery" },
+    { name: "Blog",        path: "/blog" },
+    { name: "Contact",     path: "/contact" },
   ];
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
+
+          {/* Logo – far left */}
           <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="Mother Care Pre-School" className="h-14 w-14" />
+            <img
+              src={logo}
+              alt="Mother Care Pre-School"
+              className="h-14 w-14 rounded-full object-contain"
+            />
             <div className="hidden sm:block">
               <div className="font-bold text-lg text-[#0047FF]">Mother Care Pre-School</div>
               <div className="text-xs text-gray-600 italic">Learn With Fun-To-Turn</div>
@@ -54,7 +59,7 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* CTA Button */}
+          {/* CTA – clean text, no ghost characters */}
           <div className="hidden lg:block">
             <Link
               to="/admissions#tour"
@@ -64,10 +69,11 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile hamburger */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="lg:hidden p-2 text-gray-700 hover:text-[#0047FF]"
+            aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
