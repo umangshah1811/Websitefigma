@@ -1,6 +1,9 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router";
-import { Heart, BookOpen, Palette, Star, ChevronRight, CalendarDays } from "lucide-react";
+import {
+  Heart, BookOpen, Palette, Star, ChevronRight, CalendarDays,
+  Puzzle, GraduationCap, Users, Leaf, Shield, Handshake,
+} from "lucide-react";
 
 // ── Program data ────────────────────────────────────────────────────────────
 const programs = [
@@ -12,7 +15,7 @@ const programs = [
       "A gentle introduction to the school environment where little ones explore, play, and develop social skills through interactive activities.",
     icon: Heart,
     colorClass: "bg-red-500",
-    glowColor: "#EF4444",   // red-500
+    glowColor: "#EF4444",
     highlights: [
       "Sensory play activities",
       "Music and movement",
@@ -28,7 +31,7 @@ const programs = [
       "Building foundational skills through structured play, creative activities, and early learning concepts in a nurturing environment.",
     icon: BookOpen,
     colorClass: "bg-blue-500",
-    glowColor: "#3B82F6",   // blue-500
+    glowColor: "#3B82F6",
     highlights: [
       "Language development",
       "Number recognition",
@@ -44,7 +47,7 @@ const programs = [
       "Developing cognitive abilities, fine motor skills, and pre-reading skills through engaging activities and structured curriculum.",
     icon: Palette,
     colorClass: "bg-green-500",
-    glowColor: "#22C55E",   // green-500
+    glowColor: "#22C55E",
     highlights: [
       "Pre-reading & writing skills",
       "Basic mathematics concepts",
@@ -60,7 +63,7 @@ const programs = [
       "Preparing children for primary school with advanced learning concepts, problem-solving skills, and independence.",
     icon: Star,
     colorClass: "bg-yellow-500",
-    glowColor: "#EAB308",   // yellow-500
+    glowColor: "#EAB308",
     highlights: [
       "Reading & writing proficiency",
       "Advanced mathematics",
@@ -70,43 +73,89 @@ const programs = [
   },
 ];
 
+// ── Feature data (What Makes Our Programs Special) ───────────────────────────
+const features = [
+  {
+    icon: Puzzle,
+    title: "Play-Based Learning",
+    description: "Children learn best through play. Our curriculum integrates fun activities with educational objectives.",
+    accent: "#3B82F6",   // blue
+    iconBg: "bg-blue-50",
+  },
+  {
+    icon: GraduationCap,
+    title: "Experienced Teachers",
+    description: "Our qualified educators are trained in early childhood development and passionate about teaching.",
+    accent: "#8B5CF6",   // violet
+    iconBg: "bg-violet-50",
+  },
+  {
+    icon: Users,
+    title: "Small Class Sizes",
+    description: "We maintain low student-teacher ratios to ensure personalized attention for each child.",
+    accent: "#EF4444",   // red
+    iconBg: "bg-red-50",
+  },
+  {
+    icon: Leaf,
+    title: "Holistic Development",
+    description: "We focus on cognitive, physical, social, and emotional development for well-rounded growth.",
+    accent: "#22C55E",   // green
+    iconBg: "bg-green-50",
+  },
+  {
+    icon: Shield,
+    title: "Safe Environment",
+    description: "Child-safe facilities with CCTV monitoring and strict safety protocols give parents peace of mind.",
+    accent: "#0047FF",   // brand blue
+    iconBg: "bg-blue-50",
+  },
+  {
+    icon: Handshake,
+    title: "Parent Partnership",
+    description: "Regular communication and involvement keep parents informed about their child's progress.",
+    accent: "#F59E0B",   // amber
+    iconBg: "bg-amber-50",
+  },
+];
+
+// ── Shared IntersectionObserver hook ─────────────────────────────────────────────────
+function useScrollHighlight(threshold = 0.6) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+        if (isTouchDevice) setInView(entry.isIntersecting);
+      },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, inView };
+}
+
 // ── ProgramCard ───────────────────────────────────────────────────────────────
 function ProgramCard({
   id, title, age, description, icon: Icon, colorClass, glowColor, highlights,
 }: (typeof programs)[0]) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false); // true when hovered (desktop) OR in-view (mobile)
-
-  // IntersectionObserver: fires on mobile scroll (not pointer devices)
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        // Only apply scroll-highlight when the user has no fine pointer (touch/mobile)
-        const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
-        if (isTouchDevice) {
-          setActive(entry.isIntersecting);
-        }
-      },
-      { threshold: 0.6 }
-    );
-
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
+  const { ref, inView } = useScrollHighlight(0.6);
+  const [hovered, setHovered] = useState(false);
+  const active = hovered || inView;
 
   const boxShadow = active
-    ? `0 0 0 3px ${glowColor}, 0 20px 40px ${glowColor}4D`  // 4D = ~30% opacity
+    ? `0 0 0 3px ${glowColor}, 0 20px 40px ${glowColor}4D`
     : "0 4px 16px rgba(0,0,0,0.08)";
 
   return (
     <div
-      ref={cardRef}
-      // Desktop: pointer events
-      onMouseEnter={() => setActive(true)}
-      onMouseLeave={() => setActive(false)}
+      ref={ref}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl overflow-hidden"
       style={{
         boxShadow,
@@ -115,30 +164,23 @@ function ProgramCard({
       }}
     >
       <div className="p-8">
-        {/* Icon */}
         <div className={`${colorClass} text-white p-4 rounded-2xl inline-block mb-4`}>
           <Icon size={40} style={{ pointerEvents: "none" }} />
         </div>
-
         <h2 className="text-3xl font-bold text-gray-900 mb-2">{title}</h2>
         <div className="text-lg text-gray-600 mb-4">{age}</div>
         <p className="text-gray-700 mb-6 leading-relaxed">{description}</p>
-
         <div className="mb-6">
           <h3 className="font-semibold text-gray-900 mb-3">Program Highlights:</h3>
           <ul className="space-y-2">
             {highlights.map((h) => (
               <li key={h} className="flex items-center gap-2 text-gray-700">
-                <div
-                  className="w-2 h-2 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: glowColor }}
-                />
+                <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: glowColor }} />
                 {h}
               </li>
             ))}
           </ul>
         </div>
-
         <Link
           to={`/programs/${id}`}
           className="inline-flex items-center gap-2 bg-[#0047FF] text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all"
@@ -146,6 +188,52 @@ function ProgramCard({
           Learn More <ChevronRight size={20} style={{ pointerEvents: "none" }} />
         </Link>
       </div>
+    </div>
+  );
+}
+
+// ── FeatureCard ───────────────────────────────────────────────────────────────
+function FeatureCard({
+  icon: Icon, title, description, accent, iconBg,
+}: (typeof features)[0]) {
+  const { ref, inView } = useScrollHighlight(0.6);
+  const [hovered, setHovered] = useState(false);
+  const active = hovered || inView;
+
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="bg-white rounded-2xl p-7 flex flex-col gap-4 relative overflow-hidden"
+      style={{
+        borderLeft: `4px solid ${active ? accent : accent + "55"}`,
+        boxShadow: active
+          ? `0 8px 28px rgba(0,0,0,0.11), 0 0 0 1px ${accent}22`
+          : "0 2px 10px rgba(0,0,0,0.07)",
+        transform: active ? "translateY(-4px)" : "translateY(0)",
+        transition: "all 0.3s ease",
+      }}
+    >
+      {/* Icon badge */}
+      <div
+        className={`${iconBg} w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0`}
+        style={{ border: `1.5px solid ${accent}33` }}
+      >
+        <Icon size={22} style={{ color: accent, pointerEvents: "none" }} />
+      </div>
+
+      {/* Text */}
+      <div>
+        <h3 className="font-bold text-base text-gray-900 mb-1.5">{title}</h3>
+        <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
+      </div>
+
+      {/* Decorative corner circle */}
+      <div
+        className="absolute -bottom-5 -right-5 w-16 h-16 rounded-full pointer-events-none"
+        style={{ backgroundColor: accent + "0D" }}
+      />
     </div>
   );
 }
@@ -178,25 +266,31 @@ export function Programs() {
       </section>
 
       {/* What Makes Our Programs Special */}
-      <section className="py-16 bg-gradient-to-br from-yellow-50 to-blue-50">
+      <section className="py-20 bg-gradient-to-br from-amber-50/60 via-white to-blue-50/60">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Makes Our Programs Special</h2>
+          <div className="max-w-5xl mx-auto">
+
+            {/* Section header */}
+            <div className="text-center mb-14">
+              <p className="text-sm font-semibold text-[#0047FF] uppercase tracking-widest mb-2">Our Approach</p>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+                What Makes Our Programs Special
+              </h2>
+              <p className="text-gray-500 max-w-xl mx-auto text-base">
+                Everything we do is designed with your child's best growth in mind.
+              </p>
+              {/* Decorative underline */}
+              <div className="mt-4 flex items-center justify-center gap-2">
+                <div className="h-1 w-10 rounded-full bg-[#FFCC00]" />
+                <div className="h-1 w-24 rounded-full bg-[#0047FF]" />
+                <div className="h-1 w-10 rounded-full bg-[#FFCC00]" />
+              </div>
             </div>
+
+            {/* Feature cards grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                { title: "Play-Based Learning",  description: "Children learn best through play. Our curriculum integrates fun activities with educational objectives." },
-                { title: "Experienced Teachers",  description: "Our qualified educators are trained in early childhood development and passionate about teaching." },
-                { title: "Small Class Sizes",     description: "We maintain low student-teacher ratios to ensure personalized attention for each child." },
-                { title: "Holistic Development", description: "We focus on cognitive, physical, social, and emotional development for well-rounded growth." },
-                { title: "Safe Environment",      description: "Child-safe facilities with CCTV monitoring and strict safety protocols give parents peace of mind." },
-                { title: "Parent Partnership",    description: "Regular communication and involvement keep parents informed about their child's progress." },
-              ].map((feature) => (
-                <div key={feature.title} className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">
-                  <h3 className="font-bold text-lg text-gray-900 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </div>
+              {features.map((f) => (
+                <FeatureCard key={f.title} {...f} />
               ))}
             </div>
           </div>
