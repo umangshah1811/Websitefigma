@@ -14,6 +14,9 @@ import {
   ArrowLeft,
   ArrowRight,
   CalendarDays,
+  Trophy,
+  GraduationCap as GradCap,
+  Sparkles,
 } from "lucide-react";
 import logo from "../../../assets/logo.png";
 
@@ -37,6 +40,12 @@ const floatStyle = `
 }
 .float-icon { animation: floatUp 3s ease-in-out infinite; }
 `;
+
+const storyStats = [
+  { icon: Trophy,    value: "15+",   label: "Years of Excellence",    sublabel: "Trusted Since 2009" },
+  { icon: GradCap,   value: "2,000+", label: "Happy Graduates",       sublabel: "Families Who Trust Us" },
+  { icon: Sparkles,  value: "98%",   label: "Parent Satisfaction",    sublabel: "Holistic Approach" },
+];
 
 function useCountUp(target: number, duration = 1500) {
   const [count, setCount] = useState(0);
@@ -94,6 +103,51 @@ function StatCard({
   );
 }
 
+function GoldenStatCard({
+  icon: Icon,
+  value,
+  label,
+  sublabel,
+}: {
+  icon: any;
+  value: string;
+  label: string;
+  sublabel: string;
+}) {
+  const numeric = parseInt(value.replace(/[^0-9]/g, ""), 10);
+  const suffix = value.replace(/[0-9,]/g, "");
+  const isNum = !isNaN(numeric) && value !== "98%";
+  const { count, ref } = useCountUp(isNum ? numeric : 0, 1800);
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="flex flex-col items-center text-center px-6 py-5 rounded-xl border-2 border-[#D4AF37] bg-gradient-to-b from-white to-[#FFFBEF] transition-all duration-300"
+      style={{
+        boxShadow: hovered
+          ? "0 0 20px rgba(212,175,55,0.45), 0 4px 16px rgba(0,0,0,0.08)"
+          : "0 0 8px rgba(212,175,55,0.18), 0 2px 6px rgba(0,0,0,0.05)",
+        transform: hovered ? "translateY(-4px)" : "translateY(0)",
+      }}
+    >
+      <div
+        className="w-11 h-11 rounded-full flex items-center justify-center mb-3 flex-shrink-0"
+        style={{ background: "linear-gradient(135deg, #D4AF37, #F5D97A)" }}
+      >
+        <Icon size={20} className="text-white" style={{ pointerEvents: "none" }} />
+      </div>
+      <div className="text-2xl font-extrabold text-gray-900 leading-tight">
+        {value === "98%" ? value : isNum ? `${count.toLocaleString()}${suffix}` : value}
+      </div>
+      <div className="text-sm font-bold text-[#B8860B] mt-0.5">{label}</div>
+      <div className="text-xs text-gray-500 mt-0.5">{sublabel}</div>
+    </div>
+  );
+}
+
 function useSlideIn() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -112,49 +166,49 @@ function useSlideIn() {
 
 const dailySchedule = [
   {
-    time: "8:00 AM – 9:00 AM",
+    time: "8:00 AM \u2013 9:00 AM",
     activity: "Arrival & Free Play",
-    leftEmoji: "🌅",
+    leftEmoji: "\uD83C\uDF05",
     bg: "from-orange-50 to-yellow-50",
     border: "border-orange-200",
     details: ["Greeting circle", "Free-choice play stations", "Social warm-up activities"],
   },
   {
-    time: "9:00 AM – 10:00 AM",
+    time: "9:00 AM \u2013 10:00 AM",
     activity: "Circle Time & Learning",
-    leftEmoji: "📖",
+    leftEmoji: "\uD83D\uDCD6",
     bg: "from-blue-50 to-indigo-50",
     border: "border-blue-200",
     details: ["Alphabet & number recognition", "Show-and-tell sessions", "Interactive story reading"],
   },
   {
-    time: "10:00 AM – 11:00 AM",
+    time: "10:00 AM \u2013 11:00 AM",
     activity: "Creative Activities",
-    leftEmoji: "🎨",
+    leftEmoji: "\uD83C\uDFA8",
     bg: "from-pink-50 to-rose-50",
     border: "border-pink-200",
     details: ["Finger painting", "Building blocks & clay modeling", "Craft projects"],
   },
   {
-    time: "11:00 AM – 12:00 PM",
+    time: "11:00 AM \u2013 12:00 PM",
     activity: "Outdoor Play",
-    leftEmoji: "🌳",
+    leftEmoji: "\uD83C\uDF33",
     bg: "from-green-50 to-emerald-50",
     border: "border-green-200",
     details: ["Playground exploration", "Group sports & games", "Nature observation walks"],
   },
   {
-    time: "12:00 PM – 1:00 PM",
+    time: "12:00 PM \u2013 1:00 PM",
     activity: "Snack & Rest Time",
-    leftEmoji: "🍎",
+    leftEmoji: "\uD83C\uDF4E",
     bg: "from-amber-50 to-yellow-50",
     border: "border-amber-200",
     details: ["Nutritious snack break", "Quiet rest / nap time", "Breathing & relaxation exercises"],
   },
   {
-    time: "1:00 PM – 2:00 PM",
+    time: "1:00 PM \u2013 2:00 PM",
     activity: "Story Time & Music",
-    leftEmoji: "🎵",
+    leftEmoji: "\uD83C\uDFB5",
     bg: "from-purple-50 to-violet-50",
     border: "border-purple-200",
     details: ["Rhymes & sing-alongs", "Guided storytelling", "Music & movement activities"],
@@ -164,38 +218,38 @@ const dailySchedule = [
 const galleryImages = [
   {
     src: kidsPlaying,
-    alt: "Best Playgroup in Surat – Children learning through play at Mother Care Pre-School",
+    alt: "Best Playgroup in Surat \u2013 Children learning through play at Mother Care Pre-School",
     caption: "Best Playgroup in Surat",
     ariaLabel: "Playgroup children playing at Mother Care Pre-School Surat",
   },
   {
     src: teacherReading,
-    alt: "Nursery Classroom Activities Surat – Teacher reading with children at Mother Care Pre-School",
+    alt: "Nursery Classroom Activities Surat \u2013 Teacher reading with children at Mother Care Pre-School",
     caption: "Nursery Classroom Activities Surat",
     ariaLabel: "Nursery classroom reading at Mother Care Pre-School Surat",
   },
   {
     src: artClass,
-    alt: "Mother Care Pre-School Student Life – Art and creative expression class in Surat",
+    alt: "Mother Care Pre-School Student Life \u2013 Art and creative expression class in Surat",
     caption: "Mother Care Pre-School Student Life",
     ariaLabel: "Art class at Mother Care Pre-School Surat",
   },
   {
     src: playground,
-    alt: "Holistic Early Childhood Education Gujarat – Outdoor play at Mother Care Pre-School Surat",
+    alt: "Holistic Early Childhood Education Gujarat \u2013 Outdoor play at Mother Care Pre-School Surat",
     caption: "Holistic Early Childhood Education Gujarat",
     ariaLabel: "Outdoor playground at Mother Care Pre-School Gujarat",
   },
   {
     src: circleTime,
-    alt: "Mother Care Pre-School Student Life – Circle time group learning Surat",
-    caption: "Circle Time – Group Learning",
+    alt: "Mother Care Pre-School Student Life \u2013 Circle time group learning Surat",
+    caption: "Circle Time \u2013 Group Learning",
     ariaLabel: "Circle time at Mother Care Pre-School Surat",
   },
   {
     src: heroImage,
-    alt: "Best Playgroup in Surat – Happy preschool classroom at Mother Care Pre-School",
-    caption: "Happy Classrooms – Mother Care Surat",
+    alt: "Best Playgroup in Surat \u2013 Happy preschool classroom at Mother Care Pre-School",
+    caption: "Happy Classrooms \u2013 Mother Care Surat",
     ariaLabel: "Happy classroom at Mother Care Pre-School Surat",
   },
 ];
@@ -269,19 +323,19 @@ export function Home() {
   const testimonials = [
     {
       name: "Priya Mehta",
-      role: "Parent · Nursery",
+      role: "Parent \u00b7 Nursery",
       text: "The nursery curriculum at Mother Care helped my daughter build confidence and social skills from day one. Best Pre-School in Surat for early childhood education!",
       rating: 5,
     },
     {
       name: "Rajesh Patel",
-      role: "Parent · Playgroup",
+      role: "Parent \u00b7 Playgroup",
       text: "Enrolling our son in the Playgroup program was the best decision. The teachers are nurturing, and the holistic development approach is evident every day.",
       rating: 5,
     },
     {
       name: "Sneha Shah",
-      role: "Parent · Junior KG",
+      role: "Parent \u00b7 Junior KG",
       text: "Mother Care Pre-School in Jahangir Pura offers a safe, loving environment. The Jr. KG curriculum prepared my child beautifully for primary school.",
       rating: 5,
     },
@@ -304,7 +358,7 @@ export function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 bg-yellow-400 text-gray-900 px-4 py-2 rounded-full text-sm font-semibold">
-                <span className="bg-white text-yellow-500 rounded-full w-6 h-6 flex items-center justify-center shadow-sm text-xs">⭐</span>
+                <span className="bg-white text-yellow-500 rounded-full w-6 h-6 flex items-center justify-center shadow-sm text-xs">\u2b50</span>
                 15+ Years of Excellence in Early Education
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
@@ -496,7 +550,6 @@ export function Home() {
           </div>
         </div>
 
-        {/* Lightbox — overlay clicks close, nav buttons stop propagation */}
         {lightboxIndex !== null && (
           <div
             className="fixed inset-0 bg-black/90 z-[9998] flex items-center justify-center p-4"
@@ -504,7 +557,6 @@ export function Home() {
             aria-label="Image lightbox"
             onClick={() => setLightboxIndex(null)}
           >
-            {/* Close */}
             <button
               type="button"
               onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}
@@ -514,8 +566,6 @@ export function Home() {
             >
               <X size={24} style={{ pointerEvents: "none" }} />
             </button>
-
-            {/* Prev */}
             <button
               type="button"
               onClick={lightboxPrev}
@@ -525,8 +575,6 @@ export function Home() {
             >
               <ArrowLeft size={24} style={{ pointerEvents: "none" }} />
             </button>
-
-            {/* Next */}
             <button
               type="button"
               onClick={lightboxNext}
@@ -536,8 +584,6 @@ export function Home() {
             >
               <ArrowRight size={24} style={{ pointerEvents: "none" }} />
             </button>
-
-            {/* Image — stop clicks from bubbling to overlay close */}
             <div className="max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
               <img
                 src={galleryImages[lightboxIndex].src}
@@ -635,7 +681,6 @@ export function Home() {
             <div className="lg:col-span-3 space-y-6">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 flex items-center gap-3">
-                  {/* Full-colour logo — no filter/opacity */}
                   <img
                     src={logo}
                     alt="Mother Care Pre-School Logo"
@@ -659,14 +704,17 @@ export function Home() {
                 <strong>Holistic Development</strong> approach, we nurture cognitive, emotional, and
                 social growth, preparing children not just for school, but for life.
               </p>
-              <div className="flex flex-wrap gap-3 pt-1">
-                {["15+ Years", "2000+ Graduates", "98% Parent Satisfaction"].map((pill) => (
-                  <span
-                    key={pill}
-                    className="bg-[#0047FF] text-white text-sm font-semibold px-4 py-2 rounded-full"
-                  >
-                    {pill}
-                  </span>
+
+              {/* Golden Award-Style Stat Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                {storyStats.map((s) => (
+                  <GoldenStatCard
+                    key={s.value}
+                    icon={s.icon}
+                    value={s.value}
+                    label={s.label}
+                    sublabel={s.sublabel}
+                  />
                 ))}
               </div>
             </div>
@@ -679,7 +727,7 @@ export function Home() {
               <div className="bg-blue-50 rounded-2xl min-h-64 flex items-center justify-center shadow-md overflow-hidden">
                 <img
                   src={kidsPlaying}
-                  alt="Mother Care Pre-School campus Surat – Best Preschool in Gujarat"
+                  alt="Mother Care Pre-School campus Surat \u2013 Best Preschool in Gujarat"
                   className="w-full h-64 object-cover rounded-2xl"
                 />
               </div>
