@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
-import logo from "../../assets/New Logo.png";
+import logo from "../../assets/logo.png";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -25,7 +25,7 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
 
-          {/* Logo – far left */}
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <img
               src={logo}

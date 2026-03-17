@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import logo from "../../assets/New Logo.png";
+import logo from "../../assets/logo.png";
 
 function OpenNowBadge() {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,7 +65,7 @@ export function Footer() {
 
   return (
     <>
-      {/* Back to Top – z-[9999] so nothing can block it */}
+      {/* Back to Top */}
       <button
         type="button"
         onClick={scrollToTop}
@@ -94,7 +94,7 @@ export function Footer() {
         <div className="container mx-auto px-4 py-14">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
 
-            {/* Col 1 – Brand Bio with logo */}
+            {/* Col 1 – Brand Bio */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-4">
                 <img
@@ -113,48 +113,25 @@ export function Footer() {
               <address className="not-italic text-sm text-gray-600 space-y-2 mb-5 mt-5">
                 <div className="flex items-start gap-2">
                   <MapPin size={14} className="mt-0.5 flex-shrink-0 text-[#0047FF]" />
-                  <a
-                    href={mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#00C853] transition-colors"
-                  >
+                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#00C853] transition-colors">
                     108, Green Aristo Road, Canal Road, Jahangir Pura, Surat, Gujarat 395005
                   </a>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone size={14} className="flex-shrink-0 text-[#0047FF]" />
-                  <a href="tel:+918866023444" className="hover:text-[#00C853] transition-colors">
-                    +91 88660 23444
-                  </a>
+                  <a href="tel:+918866023444" className="hover:text-[#00C853] transition-colors">+91 88660 23444</a>
                 </div>
               </address>
-
-              {/* Social icons */}
               <div className="flex gap-3">
-                <a
-                  href="https://www.facebook.com/share/18Gv2HHf3B/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                  className="p-2 rounded-full text-white transition-opacity hover:opacity-80"
-                  style={{ backgroundColor: "#1877F2" }}
-                >
+                <a href="https://www.facebook.com/share/18Gv2HHf3B/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+                  className="p-2 rounded-full text-white transition-opacity hover:opacity-80" style={{ backgroundColor: "#1877F2" }}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" />
                   </svg>
                 </a>
-                <a
-                  href="https://www.instagram.com/mothercaresurat"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
+                <a href="https://www.instagram.com/mothercaresurat" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
                   className="p-2 rounded-full text-white transition-opacity hover:opacity-80"
-                  style={{
-                    background:
-                      "linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D)",
-                  }}
-                >
+                  style={{ background: "linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D)" }}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                   </svg>
@@ -168,12 +145,7 @@ export function Footer() {
               <ul className="space-y-2">
                 {quickLinks.map((l) => (
                   <li key={l.path}>
-                    <Link
-                      to={l.path}
-                      className="text-gray-600 hover:text-[#00C853] text-sm transition-colors"
-                    >
-                      {l.label}
-                    </Link>
+                    <Link to={l.path} className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">{l.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -183,26 +155,10 @@ export function Footer() {
             <div>
               <h3 className="font-bold text-gray-900 mb-4">Programs</h3>
               <ul className="space-y-2">
-                <li>
-                  <Link to="/programs/playgroup" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">
-                    Playgroup <span className="text-gray-400">(Ages 1.5–2.5)</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/programs/nursery" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">
-                    Nursery <span className="text-gray-400">(Ages 2.5–3.5)</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/programs/junior-kg" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">
-                    Junior KG <span className="text-gray-400">(Ages 3.5–4.5)</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/programs/senior-kg" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">
-                    Senior KG <span className="text-gray-400">(Ages 4.5–5.5)</span>
-                  </Link>
-                </li>
+                <li><Link to="/programs/playgroup" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">Playgroup <span className="text-gray-400">(Ages 1.5–2.5)</span></Link></li>
+                <li><Link to="/programs/nursery" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">Nursery <span className="text-gray-400">(Ages 2.5–3.5)</span></Link></li>
+                <li><Link to="/programs/junior-kg" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">Junior KG <span className="text-gray-400">(Ages 3.5–4.5)</span></Link></li>
+                <li><Link to="/programs/senior-kg" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">Senior KG <span className="text-gray-400">(Ages 4.5–5.5)</span></Link></li>
               </ul>
             </div>
 
@@ -217,15 +173,7 @@ export function Footer() {
                 {schedule.map(({ day, hours }) => (
                   <li key={day} className="flex justify-between text-sm gap-3">
                     <span className="text-gray-500">{day}</span>
-                    <span
-                      className={
-                        hours === "Closed"
-                          ? "text-red-500 font-semibold"
-                          : "text-gray-900 font-medium"
-                      }
-                    >
-                      {hours}
-                    </span>
+                    <span className={hours === "Closed" ? "text-red-500 font-semibold" : "text-gray-900 font-medium"}>{hours}</span>
                   </li>
                 ))}
               </ul>
@@ -237,45 +185,21 @@ export function Footer() {
               <ul className="space-y-3 mb-4">
                 <li className="flex items-center gap-2 text-sm">
                   <Phone size={14} className="text-[#0047FF] flex-shrink-0" />
-                  <a
-                    href="tel:+918866023444"
-                    className="text-gray-600 hover:text-[#00C853] transition-colors font-medium"
-                  >
-                    +91 88660 23444
-                  </a>
+                  <a href="tel:+918866023444" className="text-gray-600 hover:text-[#00C853] transition-colors font-medium">+91 88660 23444</a>
                 </li>
                 <li className="flex items-center gap-2 text-sm">
                   <Mail size={14} className="text-[#0047FF] flex-shrink-0" />
-                  <a
-                    href="mailto:info@mothercaresurat.in"
-                    className="text-gray-600 hover:text-[#00C853] transition-colors"
-                  >
-                    info@mothercaresurat.in
-                  </a>
+                  <a href="mailto:info@mothercaresurat.in" className="text-gray-600 hover:text-[#00C853] transition-colors">info@mothercaresurat.in</a>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <MapPin size={14} className="text-[#0047FF] flex-shrink-0 mt-0.5" />
-                  <a
-                    href={mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-[#00C853] transition-colors"
-                  >
-                    108, Green Aristo Road, Canal Road, Jahangir Pura, Surat
-                  </a>
+                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#00C853] transition-colors">108, Green Aristo Road, Canal Road, Jahangir Pura, Surat</a>
                 </li>
               </ul>
-              <a
-                href={mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block rounded-[10px] overflow-hidden hover:opacity-90 transition-opacity"
-              >
+              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="block rounded-[10px] overflow-hidden hover:opacity-90 transition-opacity">
                 <iframe
                   src="https://maps.google.com/maps?q=Mother+Care+Pre-School+Surat&output=embed"
-                  width="100%"
-                  height="130"
-                  loading="lazy"
+                  width="100%" height="130" loading="lazy"
                   title="Mother Care Pre-School location map"
                   style={{ borderRadius: "10px", border: "1px solid #e2e8f0", display: "block" }}
                 />
@@ -288,26 +212,14 @@ export function Footer() {
             <h3 className="text-xl font-semibold text-white mb-2">Ready to Join Our Family?</h3>
             <p className="text-blue-100 mb-4">Schedule a tour and see our school in action!</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                to="/admissions#tour"
-                className="bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-[#FFD633] transition-all"
-              >
-                Book a School Tour
-              </Link>
-              <Link
-                to="/admissions"
-                className="bg-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition-all"
-              >
-                Apply for Admission
-              </Link>
+              <Link to="/admissions#tour" className="bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-[#FFD633] transition-all">Book a School Tour</Link>
+              <Link to="/admissions" className="bg-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition-all">Apply for Admission</Link>
             </div>
           </div>
 
           {/* Copyright */}
           <div className="mt-6 border-t border-gray-200 pt-5 text-center">
-            <p className="text-gray-500 text-sm">
-              Copyright 2026 Mother Care Pre-School. All rights reserved. Trusted by families in Surat for over 15 years | 2000+ Happy Students
-            </p>
+            <p className="text-gray-500 text-sm">Copyright 2026 Mother Care Pre-School. All rights reserved. Trusted by families in Surat for over 15 years | 2000+ Happy Students</p>
           </div>
         </div>
       </footer>
