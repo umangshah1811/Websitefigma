@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const galleryImages = [
   {
@@ -45,12 +46,29 @@ const galleryImages = [
 
 export function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   const categories = ["All", "Classroom", "Activities", "Outdoor", "Events"];
 
   const filteredImages =
     selectedCategory === "All"
       ? galleryImages
       : galleryImages.filter((img) => img.category === selectedCategory);
+
+  const openLightbox = (index: number) => setLightboxIndex(index);
+  const closeLightbox = () => setLightboxIndex(null);
+
+  const goPrev = () => {
+    if (lightboxIndex === null) return;
+    setLightboxIndex((lightboxIndex - 1 + filteredImages.length) % filteredImages.length);
+  };
+
+  const goNext = () => {
+    if (lightboxIndex === null) return;
+    setLightboxIndex((lightboxIndex + 1) % filteredImages.length);
+  };
+
+  const currentImage = lightboxIndex !== null ? filteredImages[lightboxIndex] : null;
 
   return (
     <div>
@@ -95,7 +113,8 @@ export function Gallery() {
             {filteredImages.map((image, index) => (
               <div
                 key={index}
-                className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all aspect-square"
+                onClick={() => openLightbox(index)}
+                className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all aspect-square cursor-pointer"
               >
                 <img
                   src={image.url}
@@ -113,6 +132,62 @@ export function Gallery() {
           </div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      {lightboxIndex !== null && currentImage && (
+        <div
+          className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center"
+          onClick={closeLightbox}
+        >
+          {/* Close */}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
+            aria-label="Close lightbox"
+            className="absolute top-4 right-4 text-white bg-white/20 rounded-full p-2 hover:bg-white/40 transition-colors"
+          >
+            <X size={24} />
+          </button>
+
+          {/* Prev */}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); goPrev(); }}
+            aria-label="Previous image"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-white/20 rounded-full p-3 hover:bg-white/40 transition-colors"
+          >
+            <ChevronLeft size={28} />
+          </button>
+
+          {/* Image container – stop clicks bubbling to overlay */}
+          <div
+            className="max-w-4xl max-h-[85vh] mx-16 flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={currentImage.url}
+              alt={currentImage.title}
+              className="max-w-full max-h-[75vh] rounded-2xl object-contain shadow-2xl"
+            />
+            <div className="mt-4 text-center">
+              <p className="text-white font-semibold text-xl">{currentImage.title}</p>
+              <p className="text-blue-300 text-sm mt-1">
+                {lightboxIndex + 1} / {filteredImages.length}
+              </p>
+            </div>
+          </div>
+
+          {/* Next */}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); goNext(); }}
+            aria-label="Next image"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-white/20 rounded-full p-3 hover:bg-white/40 transition-colors"
+          >
+            <ChevronRight size={28} />
+          </button>
+        </div>
+      )}
 
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-br from-[#0047FF] to-blue-600 text-white">

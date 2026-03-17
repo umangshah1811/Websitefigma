@@ -11,6 +11,7 @@ export function Programs() {
         "A gentle introduction to the school environment where little ones explore, play, and develop social skills through interactive activities.",
       icon: Heart,
       color: "bg-red-500",
+      hoverGlow: "",
       highlights: [
         "Sensory play activities",
         "Music and movement",
@@ -26,6 +27,7 @@ export function Programs() {
         "Building foundational skills through structured play, creative activities, and early learning concepts in a nurturing environment.",
       icon: BookOpen,
       color: "bg-blue-500",
+      hoverGlow: "",
       highlights: [
         "Language development",
         "Number recognition",
@@ -41,6 +43,7 @@ export function Programs() {
         "Developing cognitive abilities, fine motor skills, and pre-reading skills through engaging activities and structured curriculum.",
       icon: Palette,
       color: "bg-green-500",
+      hoverGlow: "",
       highlights: [
         "Pre-reading & writing skills",
         "Basic mathematics concepts",
@@ -56,6 +59,7 @@ export function Programs() {
         "Preparing children for primary school with advanced learning concepts, problem-solving skills, and independence.",
       icon: Star,
       color: "bg-yellow-500",
+      hoverGlow: "senior-kg-card",
       highlights: [
         "Reading & writing proficiency",
         "Advanced mathematics",
@@ -67,6 +71,13 @@ export function Programs() {
 
   return (
     <div>
+      {/* Scoped CSS: Senior KG yellow glow on hover */}
+      <style>{`
+        .senior-kg-card:hover {
+          box-shadow: 0 0 0 3px #FFCC00, 0 20px 40px rgba(255, 204, 0, 0.45);
+        }
+      `}</style>
+
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 to-purple-50 py-16">
         <div className="container mx-auto px-4">
@@ -87,7 +98,9 @@ export function Programs() {
             {programs.map((program) => (
               <div
                 key={program.id}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl shadow-lg hover:shadow-2xl transition-all overflow-hidden"
+                className={`bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl shadow-lg transition-all overflow-hidden ${
+                  program.hoverGlow ? program.hoverGlow : "hover:shadow-2xl"
+                }`}
               >
                 <div className="p-8">
                   <div className={`${program.color} text-white p-4 rounded-2xl inline-block mb-4`}>

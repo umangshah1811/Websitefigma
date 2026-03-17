@@ -36,9 +36,7 @@ function OpenNowBadge() {
 
 export function Footer() {
   const scrollToTop = () => {
-    try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (_) {}
-    try { document.documentElement.scrollTo({ top: 0, behavior: "smooth" }); } catch (_) {}
-    try { document.body.scrollTo({ top: 0, behavior: "smooth" }); } catch (_) {}
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const quickLinks = [
@@ -67,12 +65,13 @@ export function Footer() {
 
   return (
     <>
-      {/* Back to Top */}
+      {/* Back to Top – z-[9999] so nothing can block it; onClick directly on <button> */}
       <button
         type="button"
         onClick={scrollToTop}
         aria-label="Back to top"
-        className="fixed bottom-24 right-4 z-50 bg-[#0047FF] text-white p-3 rounded-full shadow-xl hover:bg-blue-700 active:scale-95 transition-all hover:scale-110"
+        style={{ zIndex: 9999 }}
+        className="fixed bottom-24 right-4 bg-[#0047FF] text-white p-3 rounded-full shadow-xl hover:bg-blue-700 active:scale-95 transition-all hover:scale-110"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -85,6 +84,7 @@ export function Footer() {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
+          style={{ pointerEvents: "none" }}
         >
           <polyline points="18 15 12 9 6 15" />
         </svg>
@@ -283,7 +283,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* CTA strip – clean button text */}
+          {/* CTA strip */}
           <div className="mt-10 bg-[#0047FF] rounded-2xl p-6 text-center">
             <h3 className="text-xl font-semibold text-white mb-2">Ready to Join Our Family?</h3>
             <p className="text-blue-100 mb-4">Schedule a tour and see our school in action!</p>
@@ -303,7 +303,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Copyright – plain text, no symbol artifacts */}
+          {/* Copyright */}
           <div className="mt-6 border-t border-gray-200 pt-5 text-center">
             <p className="text-gray-500 text-sm">
               Copyright 2026 Mother Care Pre-School. All rights reserved. Trusted by families in Surat for over 15 years | 2000+ Happy Students
