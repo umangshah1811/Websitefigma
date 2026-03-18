@@ -32,13 +32,12 @@ export function Header() {
               alt="Mother Care Pre-School"
               className="h-12 w-12 rounded-full object-contain flex-shrink-0"
             />
-            {/* BUG 1 FIX: was "hidden sm:block" — brand name was invisible below 640 px.
-                Now always visible; font scales down on xs screens. */}
             <div className="block min-w-0">
               <div className="font-bold text-sm sm:text-lg leading-tight text-[#0047FF] truncate">
                 Mother Care Pre-School
               </div>
-              <div className="text-xs text-gray-600 italic hidden xs:block sm:block">
+              {/* Tagline: always visible on all screen sizes */}
+              <div className="text-xs text-gray-600 italic">
                 Learn With Fun-To-Turn
               </div>
             </div>
