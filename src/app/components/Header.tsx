@@ -33,11 +33,12 @@ export function Header() {
               className="h-12 w-12 rounded-full object-contain flex-shrink-0"
             />
             <div className="block min-w-0">
-              <div className="font-bold text-sm sm:text-lg leading-tight text-[#0047FF] truncate">
+              {/* Mobile: text-base (16px), Desktop sm+: text-lg (18px) */}
+              <div className="font-bold text-base sm:text-lg leading-tight text-[#0047FF] truncate">
                 Mother Care Pre-School
               </div>
-              {/* Tagline: always visible on all screen sizes */}
-              <div className="text-xs text-gray-600 italic">
+              {/* Mobile: text-xs (13px) bumped from text-xs (12px default) — always visible */}
+              <div className="text-xs sm:text-xs text-gray-600 italic mt-0.5">
                 Learn With Fun-To-Turn
               </div>
             </div>
