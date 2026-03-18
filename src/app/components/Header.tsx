@@ -25,16 +25,22 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
 
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
+          {/* Logo + Brand — always visible on all screen sizes */}
+          <Link to="/" className="flex items-center gap-2 min-w-0">
             <img
               src={logo}
               alt="Mother Care Pre-School"
-              className="h-14 w-14 rounded-full object-contain"
+              className="h-12 w-12 rounded-full object-contain flex-shrink-0"
             />
-            <div className="hidden sm:block">
-              <div className="font-bold text-lg text-[#0047FF]">Mother Care Pre-School</div>
-              <div className="text-xs text-gray-600 italic">Learn With Fun-To-Turn</div>
+            {/* BUG 1 FIX: was "hidden sm:block" — brand name was invisible below 640 px.
+                Now always visible; font scales down on xs screens. */}
+            <div className="block min-w-0">
+              <div className="font-bold text-sm sm:text-lg leading-tight text-[#0047FF] truncate">
+                Mother Care Pre-School
+              </div>
+              <div className="text-xs text-gray-600 italic hidden xs:block sm:block">
+                Learn With Fun-To-Turn
+              </div>
             </div>
           </Link>
 
@@ -73,7 +79,7 @@ export function Header() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-gray-700 hover:text-[#0047FF]"
+            className="lg:hidden p-2 text-gray-700 hover:text-[#0047FF] flex-shrink-0 ml-2"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

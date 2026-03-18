@@ -17,6 +17,7 @@ import {
   Trophy,
   GraduationCap as GradCap,
   Sparkles,
+  ChevronDown,
 } from "lucide-react";
 import logo from "../../../assets/logo.png";
 
@@ -164,6 +165,159 @@ function useSlideIn() {
   return { ref, visible };
 }
 
+// ── BUG 2 FIX: ProgramCard with IntersectionObserver glow on mobile scroll ──
+function ProgramCard({
+  id, title, age, description, icon: Icon, color, glowColor,
+}: {
+  id: string; title: string; age: string; description: string;
+  icon: any; color: string; glowColor: string;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(false);
+
+  // IntersectionObserver — only activates on touch/mobile (pointer: coarse)
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+        if (isTouchDevice) setActive(entry.isIntersecting);
+      },
+      { threshold: 0.6 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <Link
+      to={`/programs/${id}`}
+      className="group bg-white rounded-2xl shadow-md p-6 block"
+    >
+      {/* Inner div holds the ref so the Link element stays clean */}
+      <div
+        ref={cardRef}
+        onMouseEnter={() => setActive(true)}
+        onMouseLeave={() => setActive(false)}
+        className="rounded-2xl"
+        style={{
+          boxShadow: active
+            ? `0 8px 32px 4px ${glowColor}, 0 2px 8px rgba(0,0,0,0.06)`
+            : "none",
+          transform: active ? "translateY(-8px)" : "translateY(0)",
+          transition: "box-shadow 0.3s ease, transform 0.3s ease",
+          margin: "-24px",
+          padding: "24px",
+        }}
+      >
+        <div className={`${color} text-white p-4 rounded-xl inline-block mb-4`}>
+          <Icon size={32} style={{ pointerEvents: "none" }} />
+        </div>
+        <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
+        <div className="text-sm text-gray-500 mb-3">{age}</div>
+        <p className="text-gray-600 text-sm mb-4">{description}</p>
+        <div className="flex items-center text-[#0047FF] font-semibold text-sm gap-1 group-hover:gap-2 transition-all">
+          Learn More <ChevronRight size={16} style={{ pointerEvents: "none" }} />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+// ── BUG 3 FIX: ScheduleItem with onClick toggle + IntersectionObserver auto-open on mobile ──
+function ScheduleItem({
+  item,
+  index,
+}: {
+  item: typeof dailySchedule[0];
+  index: number;
+}) {
+  const itemRef = useRef<HTMLDivElement>(null);
+  // Desktop: hover state. Mobile: tap to toggle OR auto-open on scroll-into-view.
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    const el = itemRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+        if (isTouchDevice) {
+          // Auto-open the card that scrolls into center; close when it scrolls out
+          setExpanded(entry.isIntersecting);
+        }
+      },
+      { threshold: 0.6 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={itemRef}
+      className="flex items-stretch gap-4"
+      // Desktop: hover to expand
+      onMouseEnter={() => {
+        const isDesktop = window.matchMedia("(pointer: fine)").matches;
+        if (isDesktop) setExpanded(true);
+      }}
+      onMouseLeave={() => {
+        const isDesktop = window.matchMedia("(pointer: fine)").matches;
+        if (isDesktop) setExpanded(false);
+      }}
+      // Mobile + Desktop: tap/click to toggle
+      onClick={() => {
+        const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+        if (isTouchDevice) setExpanded((prev) => !prev);
+      }}
+      style={{ cursor: "pointer" }}
+    >
+      <div className="flex flex-col items-center justify-start pt-4 w-14 flex-shrink-0">
+        <span className="text-4xl float-icon select-none" aria-hidden="true">
+          {item.leftEmoji}
+        </span>
+      </div>
+      <div
+        className={`flex-1 border-2 ${item.border} bg-gradient-to-r ${
+          item.bg
+        } rounded-2xl px-5 py-4 transition-all duration-300 ${
+          expanded ? "shadow-lg" : "shadow-sm"
+        }`}
+      >
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="font-bold text-gray-900 text-base">{item.activity}</div>
+            <div className="text-sm text-slate-500 mt-0.5 mb-1">{item.time}</div>
+          </div>
+          {/* Chevron indicator visible on mobile */}
+          <ChevronDown
+            size={18}
+            className={`text-gray-400 transition-transform duration-300 flex-shrink-0 ${
+              expanded ? "rotate-180" : "rotate-0"
+            }`}
+            style={{ pointerEvents: "none" }}
+          />
+        </div>
+        <div
+          className="overflow-hidden transition-all duration-300"
+          style={{ maxHeight: expanded ? "160px" : "0px", opacity: expanded ? 1 : 0 }}
+        >
+          <ul className="mt-2 space-y-1 border-t border-white/60 pt-2">
+            {item.details.map((d, i) => (
+              <li key={i} className="text-sm text-gray-700 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0047FF] flex-shrink-0" />
+                {d}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const dailySchedule = [
   {
     time: "8:00 AM – 9:00 AM",
@@ -261,10 +415,8 @@ const reviewGlows = [
 ];
 
 export function Home() {
-  const [hoveredSchedule, setHoveredSchedule] = useState<number | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [hoveredReview, setHoveredReview] = useState<number | null>(null);
-  const [hoveredProgram, setHoveredProgram] = useState<string | null>(null);
   const storyLeft = useSlideIn();
   const storyRight = useSlideIn();
 
@@ -418,7 +570,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* Programs */}
+      {/* Programs — BUG 2 FIX: now uses ProgramCard with IntersectionObserver */}
       <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -429,37 +581,13 @@ export function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {programs.map((p) => (
-              <Link
-                key={p.id}
-                to={`/programs/${p.id}`}
-                className="group bg-white rounded-2xl shadow-md p-6 block"
-                style={{
-                  boxShadow:
-                    hoveredProgram === p.id
-                      ? `0 8px 32px 4px ${p.glowColor}, 0 2px 8px rgba(0,0,0,0.06)`
-                      : "0 1px 3px rgba(0,0,0,0.1)",
-                  transform: hoveredProgram === p.id ? "translateY(-8px)" : "translateY(0)",
-                  transition: "box-shadow 0.3s ease, transform 0.3s ease",
-                }}
-                onMouseEnter={() => setHoveredProgram(p.id)}
-                onMouseLeave={() => setHoveredProgram(null)}
-              >
-                <div className={`${p.color} text-white p-4 rounded-xl inline-block mb-4`}>
-                  <p.icon size={32} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{p.title}</h3>
-                <div className="text-sm text-gray-500 mb-3">{p.age}</div>
-                <p className="text-gray-600 text-sm mb-4">{p.description}</p>
-                <div className="flex items-center text-[#0047FF] font-semibold text-sm gap-1 group-hover:gap-2 transition-all">
-                  Learn More <ChevronRight size={16} />
-                </div>
-              </Link>
+              <ProgramCard key={p.id} {...p} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Daily Routine */}
+      {/* Daily Routine — BUG 3 FIX: now uses ScheduleItem with onClick + IntersectionObserver */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -469,44 +597,9 @@ export function Home() {
             </p>
           </div>
           <div className="max-w-2xl mx-auto space-y-4">
-            {dailySchedule.map((item, index) => {
-              const isHovered = hoveredSchedule === index;
-              return (
-                <div
-                  key={index}
-                  className="flex items-stretch gap-4"
-                  onMouseEnter={() => setHoveredSchedule(index)}
-                  onMouseLeave={() => setHoveredSchedule(null)}
-                >
-                  <div className="flex flex-col items-center justify-start pt-4 w-14 flex-shrink-0">
-                    <span className="text-4xl float-icon select-none" aria-hidden="true">{item.leftEmoji}</span>
-                  </div>
-                  <div
-                    className={`flex-1 border-2 ${item.border} bg-gradient-to-r ${
-                      item.bg
-                    } rounded-2xl px-5 py-4 transition-all duration-300 ${
-                      isHovered ? "shadow-lg" : "shadow-sm"
-                    }`}
-                  >
-                    <div className="font-bold text-gray-900 text-base">{item.activity}</div>
-                    <div className="text-sm text-slate-500 mt-0.5 mb-1">{item.time}</div>
-                    <div
-                      className="overflow-hidden transition-all duration-300"
-                      style={{ maxHeight: isHovered ? "160px" : "0px", opacity: isHovered ? 1 : 0 }}
-                    >
-                      <ul className="mt-2 space-y-1 border-t border-white/60 pt-2">
-                        {item.details.map((d, i) => (
-                          <li key={i} className="text-sm text-gray-700 flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#0047FF] flex-shrink-0" />
-                            {d}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            {dailySchedule.map((item, index) => (
+              <ScheduleItem key={index} item={item} index={index} />
+            ))}
           </div>
         </div>
       </section>
@@ -706,8 +799,6 @@ export function Home() {
                 <strong>Holistic Development</strong> approach, we nurture cognitive, emotional, and
                 social growth, preparing children not just for school, but for life.
               </p>
-
-              {/* Golden Award-Style Stat Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                 {storyStats.map((s) => (
                   <GoldenStatCard
