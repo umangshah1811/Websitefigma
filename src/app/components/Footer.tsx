@@ -1,10 +1,28 @@
 import { Link } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Mail, Phone, MapPin, Clock, CalendarDays } from "lucide-react";
 import logo from "../../assets/logo.png";
 
 const mapsUrl =
   "https://www.google.com/maps/dir/?api=1&destination=108+Green+Aristo+Road+Canal+Road+Jahangir+Pura+Surat+Gujarat+395005";
+
+// ── Mobile-aware footer link: flashes green on tap via :active + touchstart ──
+function FooterLink({ to, children }: { to: string; children: React.ReactNode }) {
+  const [touched, setTouched] = useState(false);
+  return (
+    <Link
+      to={to}
+      className="text-sm transition-colors"
+      style={{ color: touched ? "#00C853" : undefined }}
+      onTouchStart={() => setTouched(true)}
+      onTouchEnd={() => setTimeout(() => setTouched(false), 400)}
+      onMouseEnter={(e) => (e.currentTarget.style.color = "#00C853")}
+      onMouseLeave={(e) => (e.currentTarget.style.color = "")}
+    >
+      {children}
+    </Link>
+  );
+}
 
 function OpenNowBadge() {
   const [isOpen, setIsOpen] = useState(false);
@@ -98,13 +116,13 @@ export function Footer() {
               <address className="not-italic text-sm text-gray-600 space-y-2 mb-5 mt-5">
                 <div className="flex items-start gap-2">
                   <MapPin size={14} className="mt-0.5 flex-shrink-0 text-[#0047FF]" />
-                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#00C853] transition-colors">
+                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#00C853] active:text-[#00C853] transition-colors">
                     108, Green Aristo Road, Canal Road, Jahangir Pura, Surat, Gujarat 395005
                   </a>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone size={14} className="flex-shrink-0 text-[#0047FF]" />
-                  <a href="tel:+918866023444" className="hover:text-[#00C853] transition-colors">+91 88660 23444</a>
+                  <a href="tel:+918866023444" className="hover:text-[#00C853] active:text-[#00C853] transition-colors">+91 88660 23444</a>
                 </div>
               </address>
               <div className="flex gap-3">
@@ -130,7 +148,7 @@ export function Footer() {
               <ul className="space-y-2">
                 {quickLinks.map((l) => (
                   <li key={l.path}>
-                    <Link to={l.path} className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">{l.label}</Link>
+                    <FooterLink to={l.path}>{l.label}</FooterLink>
                   </li>
                 ))}
               </ul>
@@ -140,10 +158,10 @@ export function Footer() {
             <div>
               <h3 className="font-bold text-gray-900 mb-4">Programs</h3>
               <ul className="space-y-2">
-                <li><Link to="/programs/playgroup" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">Playgroup <span className="text-gray-400">(Ages 1.5–2.5)</span></Link></li>
-                <li><Link to="/programs/nursery" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">Nursery <span className="text-gray-400">(Ages 2.5–3.5)</span></Link></li>
-                <li><Link to="/programs/junior-kg" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">Junior KG <span className="text-gray-400">(Ages 3.5–4.5)</span></Link></li>
-                <li><Link to="/programs/senior-kg" className="text-gray-600 hover:text-[#00C853] text-sm transition-colors">Senior KG <span className="text-gray-400">(Ages 4.5–5.5)</span></Link></li>
+                <li><FooterLink to="/programs/playgroup">Playgroup <span className="text-gray-400">(Ages 2–3)</span></FooterLink></li>
+                <li><FooterLink to="/programs/nursery">Nursery <span className="text-gray-400">(Ages 3–4)</span></FooterLink></li>
+                <li><FooterLink to="/programs/junior-kg">Junior KG <span className="text-gray-400">(Ages 4–5)</span></FooterLink></li>
+                <li><FooterLink to="/programs/senior-kg">Senior KG <span className="text-gray-400">(Ages 5–6)</span></FooterLink></li>
               </ul>
             </div>
 
@@ -170,19 +188,19 @@ export function Footer() {
               <ul className="space-y-3 mb-4">
                 <li className="flex items-center gap-2 text-sm">
                   <Phone size={14} className="text-[#0047FF] flex-shrink-0" />
-                  <a href="tel:+918866023444" className="text-gray-600 hover:text-[#0047FF] transition-colors font-medium underline-offset-2 hover:underline">
+                  <a href="tel:+918866023444" className="text-gray-600 hover:text-[#0047FF] active:text-[#0047FF] transition-colors font-medium underline-offset-2 hover:underline">
                     +91 88660 23444
                   </a>
                 </li>
                 <li className="flex items-center gap-2 text-sm">
                   <Mail size={14} className="text-[#0047FF] flex-shrink-0" />
-                  <a href="mailto:info@mothercaresurat.in" className="text-gray-600 hover:text-[#0047FF] transition-colors underline-offset-2 hover:underline">
+                  <a href="mailto:info@mothercaresurat.in" className="text-gray-600 hover:text-[#0047FF] active:text-[#0047FF] transition-colors underline-offset-2 hover:underline">
                     info@mothercaresurat.in
                   </a>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <MapPin size={14} className="text-[#0047FF] flex-shrink-0 mt-0.5" />
-                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#0047FF] transition-colors underline-offset-2 hover:underline">
+                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#0047FF] active:text-[#0047FF] transition-colors underline-offset-2 hover:underline">
                     108, Green Aristo Road, Canal Road, Jahangir Pura, Surat
                   </a>
                 </li>
