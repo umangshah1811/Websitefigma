@@ -165,7 +165,6 @@ function useSlideIn() {
   return { ref, visible };
 }
 
-// ── BUG 2 FIX: ProgramCard with IntersectionObserver glow on mobile scroll ──
 function ProgramCard({
   id, title, age, description, icon: Icon, color, glowColor,
 }: {
@@ -175,7 +174,6 @@ function ProgramCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
 
-  // IntersectionObserver — only activates on touch/mobile (pointer: coarse)
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
@@ -195,7 +193,6 @@ function ProgramCard({
       to={`/programs/${id}`}
       className="group bg-white rounded-2xl shadow-md p-6 block"
     >
-      {/* Inner div holds the ref so the Link element stays clean */}
       <div
         ref={cardRef}
         onMouseEnter={() => setActive(true)}
@@ -225,7 +222,6 @@ function ProgramCard({
   );
 }
 
-// ── BUG 3 FIX: ScheduleItem with onClick toggle + IntersectionObserver auto-open on mobile ──
 function ScheduleItem({
   item,
   index,
@@ -234,7 +230,6 @@ function ScheduleItem({
   index: number;
 }) {
   const itemRef = useRef<HTMLDivElement>(null);
-  // Desktop: hover state. Mobile: tap to toggle OR auto-open on scroll-into-view.
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
@@ -244,7 +239,6 @@ function ScheduleItem({
       ([entry]) => {
         const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
         if (isTouchDevice) {
-          // Auto-open the card that scrolls into center; close when it scrolls out
           setExpanded(entry.isIntersecting);
         }
       },
@@ -258,7 +252,6 @@ function ScheduleItem({
     <div
       ref={itemRef}
       className="flex items-stretch gap-4"
-      // Desktop: hover to expand
       onMouseEnter={() => {
         const isDesktop = window.matchMedia("(pointer: fine)").matches;
         if (isDesktop) setExpanded(true);
@@ -267,7 +260,6 @@ function ScheduleItem({
         const isDesktop = window.matchMedia("(pointer: fine)").matches;
         if (isDesktop) setExpanded(false);
       }}
-      // Mobile + Desktop: tap/click to toggle
       onClick={() => {
         const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
         if (isTouchDevice) setExpanded((prev) => !prev);
@@ -291,7 +283,6 @@ function ScheduleItem({
             <div className="font-bold text-gray-900 text-base">{item.activity}</div>
             <div className="text-sm text-slate-500 mt-0.5 mb-1">{item.time}</div>
           </div>
-          {/* Chevron indicator visible on mobile */}
           <ChevronDown
             size={18}
             className={`text-gray-400 transition-transform duration-300 flex-shrink-0 ${
@@ -320,7 +311,7 @@ function ScheduleItem({
 
 const dailySchedule = [
   {
-    time: "8:00 AM – 9:00 AM",
+    time: "8:30 AM – 9:00 AM",
     activity: "Arrival & Free Play",
     leftEmoji: "🌅",
     bg: "from-orange-50 to-yellow-50",
@@ -344,15 +335,7 @@ const dailySchedule = [
     details: ["Finger painting", "Building blocks & clay modeling", "Craft projects"],
   },
   {
-    time: "11:00 AM – 12:00 PM",
-    activity: "Outdoor Play",
-    leftEmoji: "🌳",
-    bg: "from-green-50 to-emerald-50",
-    border: "border-green-200",
-    details: ["Playground exploration", "Group sports & games", "Nature observation walks"],
-  },
-  {
-    time: "12:00 PM – 1:00 PM",
+    time: "11:00 AM – 11:30 AM",
     activity: "Snack & Rest Time",
     leftEmoji: "🍎",
     bg: "from-amber-50 to-yellow-50",
@@ -360,7 +343,15 @@ const dailySchedule = [
     details: ["Nutritious snack break", "Quiet rest / nap time", "Breathing & relaxation exercises"],
   },
   {
-    time: "1:00 PM – 2:00 PM",
+    time: "11:30 AM – 12:30 PM",
+    activity: "Outdoor Play",
+    leftEmoji: "🌳",
+    bg: "from-green-50 to-emerald-50",
+    border: "border-green-200",
+    details: ["Playground exploration", "Group sports & games", "Nature observation walks"],
+  },
+  {
+    time: "12:30 PM – 1:30 PM",
     activity: "Story Time & Music",
     leftEmoji: "🎵",
     bg: "from-purple-50 to-violet-50",
@@ -409,14 +400,15 @@ const galleryImages = [
 ];
 
 const reviewGlows = [
-  "rgba(239,68,68,0.18)",
-  "rgba(59,130,246,0.18)",
-  "rgba(34,197,94,0.18)",
+  "rgba(239,68,68,0.28)",
+  "rgba(59,130,246,0.28)",
+  "rgba(34,197,94,0.28)",
 ];
 
 export function Home() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [hoveredReview, setHoveredReview] = useState<number | null>(null);
+  const [activeReview, setActiveReview] = useState<number | null>(null);
   const storyLeft = useSlideIn();
   const storyRight = useSlideIn();
 
@@ -437,7 +429,7 @@ export function Home() {
     {
       id: "playgroup",
       title: "Playgroup",
-      age: "1.5 - 2.5 years",
+      age: "2 - 3 years",
       description: "Introduction to social learning through play-based activities",
       icon: Heart,
       color: "bg-red-500",
@@ -446,7 +438,7 @@ export function Home() {
     {
       id: "nursery",
       title: "Nursery",
-      age: "2.5 - 3.5 years",
+      age: "3 - 4 years",
       description: "Building foundational skills through interactive learning",
       icon: BookOpen,
       color: "bg-blue-500",
@@ -455,7 +447,7 @@ export function Home() {
     {
       id: "junior-kg",
       title: "Junior KG",
-      age: "3.5 - 4.5 years",
+      age: "4 - 5 years",
       description: "Developing cognitive and motor skills with structured curriculum",
       icon: Palette,
       color: "bg-green-500",
@@ -464,7 +456,7 @@ export function Home() {
     {
       id: "senior-kg",
       title: "Senior KG",
-      age: "4.5 - 5.5 years",
+      age: "5 - 6 years",
       description: "Preparing for primary school with advanced learning concepts",
       icon: Star,
       color: "bg-yellow-500",
@@ -570,7 +562,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* Programs — BUG 2 FIX: now uses ProgramCard with IntersectionObserver */}
+      {/* Programs */}
       <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -587,7 +579,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* Daily Routine — BUG 3 FIX: now uses ScheduleItem with onClick + IntersectionObserver */}
+      {/* Daily Routine */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -708,42 +700,47 @@ export function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <div
-                key={i}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 shadow-md transition-all duration-300"
-                style={{
-                  boxShadow:
-                    hoveredReview === i
+            {testimonials.map((t, i) => {
+              const isGlowing = hoveredReview === i || activeReview === i;
+              return (
+                <div
+                  key={i}
+                  className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 shadow-md transition-all duration-300"
+                  style={{
+                    boxShadow: isGlowing
                       ? `0 0 28px 6px ${reviewGlows[i]}, 0 4px 16px rgba(0,0,0,0.08)`
-                      : undefined,
-                }}
-                onMouseEnter={() => setHoveredReview(i)}
-                onMouseLeave={() => setHoveredReview(null)}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-[#0047FF] text-white flex items-center justify-center font-bold text-lg flex-shrink-0">
-                    {t.name.charAt(0)}
+                      : "0 4px 6px rgba(0,0,0,0.05)",
+                    transform: isGlowing ? "translateY(-4px)" : "translateY(0)",
+                  }}
+                  onMouseEnter={() => setHoveredReview(i)}
+                  onMouseLeave={() => setHoveredReview(null)}
+                  onTouchStart={() => setActiveReview(i)}
+                  onTouchEnd={() => setTimeout(() => setActiveReview(null), 400)}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-[#0047FF] text-white flex items-center justify-center font-bold text-lg flex-shrink-0">
+                      {t.name.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900 text-sm">{t.name}</div>
+                      <div className="text-xs text-slate-500">{t.role}</div>
+                    </div>
+                    <svg className="ml-auto w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" aria-label="Google Review">
+                      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
+                      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                    </svg>
                   </div>
-                  <div>
-                    <div className="font-semibold text-gray-900 text-sm">{t.name}</div>
-                    <div className="text-xs text-slate-500">{t.role}</div>
+                  <div className="flex gap-1 mb-3">
+                    {[...Array(t.rating)].map((_, j) => (
+                      <Star key={j} className="fill-yellow-400 text-yellow-400" size={16} />
+                    ))}
                   </div>
-                  <svg className="ml-auto w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" aria-label="Google Review">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                  </svg>
+                  <p className="text-gray-700 text-sm italic leading-relaxed">"{t.text}"</p>
                 </div>
-                <div className="flex gap-1 mb-3">
-                  {[...Array(t.rating)].map((_, j) => (
-                    <Star key={j} className="fill-yellow-400 text-yellow-400" size={16} />
-                  ))}
-                </div>
-                <p className="text-gray-700 text-sm italic leading-relaxed">"{t.text}"</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <div className="text-center mt-10">
             <a
