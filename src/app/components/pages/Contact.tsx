@@ -10,15 +10,15 @@ const contactCards = [
   {
     icon: MapPin,
     title: "Visit Us",
-    bg: "from-blue-50 to-indigo-50",
-    iconBg: "bg-[#0047FF]",
-    glow: "#0047FF",
+    bg: "from-red-50 to-rose-50",
+    iconBg: "bg-red-500",
+    glow: "#EF4444",
     content: (
       <a
         href={MAPS_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[#0047FF] hover:underline leading-relaxed text-sm"
+        className="text-red-600 hover:underline leading-relaxed text-base"
       >
         108, Green Aristo Road, Canal Road,
         <br />Jahangir Pura, Surat, Gujarat 395005, India
@@ -28,13 +28,13 @@ const contactCards = [
   {
     icon: Phone,
     title: "Call Us",
-    bg: "from-green-50 to-emerald-50",
-    iconBg: "bg-green-500",
-    glow: "#22C55E",
+    bg: "from-blue-50 to-indigo-50",
+    iconBg: "bg-blue-500",
+    glow: "#3B82F6",
     content: (
       <a
         href={`tel:${PHONE.replace(/\s/g, "")}`}
-        className="text-green-600 hover:underline font-medium text-sm"
+        className="text-blue-600 hover:underline font-medium text-base"
       >
         {PHONE}
       </a>
@@ -43,13 +43,13 @@ const contactCards = [
   {
     icon: Mail,
     title: "Email Us",
-    bg: "from-purple-50 to-pink-50",
-    iconBg: "bg-purple-500",
-    glow: "#A855F7",
+    bg: "from-green-50 to-emerald-50",
+    iconBg: "bg-green-500",
+    glow: "#22C55E",
     content: (
       <a
         href={`mailto:${EMAIL}`}
-        className="text-purple-600 hover:underline font-medium text-sm break-all"
+        className="text-green-600 hover:underline font-medium text-base break-all"
       >
         {EMAIL}
       </a>
@@ -58,7 +58,7 @@ const contactCards = [
   {
     icon: Clock,
     title: "Office Hours",
-    bg: "from-yellow-50 to-orange-50",
+    bg: "from-yellow-50 to-amber-50",
     iconBg: "bg-yellow-500",
     glow: "#EAB308",
     content: (
@@ -79,11 +79,6 @@ function ContactCard({
       className={`group flex items-start gap-4 p-6 bg-gradient-to-br ${bg} rounded-2xl border border-transparent
         transition-all duration-300 cursor-default
         hover:-translate-y-1.5 hover:scale-[1.02] hover:shadow-xl`}
-      style={{
-        // @ts-ignore
-        "--glow": glow,
-        boxShadow: undefined,
-      }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLDivElement).style.boxShadow =
           `0 12px 32px ${glow}30, 0 0 0 2px ${glow}40`;
@@ -123,7 +118,7 @@ export function Contact() {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Contact Us</h1>
             <p className="text-xl text-gray-700 leading-relaxed">
-              We'd love to hear from you. Get in touch with us for any questions or inquiries
+              We’d love to hear from you. Get in touch with us for any questions or inquiries
             </p>
           </div>
         </div>
