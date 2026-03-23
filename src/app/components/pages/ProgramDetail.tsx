@@ -4,7 +4,7 @@ import { Heart, BookOpen, Palette, Star, Clock, Users, Target, CheckCircle, Chev
 const programsData: Record<string, any> = {
   playgroup: {
     title: "Playgroup",
-    age: "1.5 - 2.5 years",
+    age: "2 - 3 years",
     icon: Heart,
     color: "bg-red-500",
     description:
@@ -35,7 +35,7 @@ const programsData: Record<string, any> = {
   },
   nursery: {
     title: "Nursery",
-    age: "2.5 - 3.5 years",
+    age: "3 - 4 years",
     icon: BookOpen,
     color: "bg-blue-500",
     description:
@@ -66,7 +66,7 @@ const programsData: Record<string, any> = {
   },
   "junior-kg": {
     title: "Junior KG",
-    age: "3.5 - 4.5 years",
+    age: "4 - 5 years",
     icon: Palette,
     color: "bg-green-500",
     description:
@@ -97,7 +97,7 @@ const programsData: Record<string, any> = {
   },
   "senior-kg": {
     title: "Senior KG",
-    age: "4.5 - 5.5 years",
+    age: "5 - 6 years",
     icon: Star,
     color: "bg-yellow-500",
     description:
