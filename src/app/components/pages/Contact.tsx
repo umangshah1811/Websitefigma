@@ -5,7 +5,7 @@ const MAPS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=108+Green+Aristo+Road+Canal+Road+Jahangir+Pura+Surat+Gujarat+395005";
 const EMAIL = "mothercare79ps@gmail.com";
 const PHONE = "+91 8866023444";
-const WA_NUMBER = "918866023444"; // WhatsApp number without + sign
+const WA_NUMBER = "918866023444";
 
 const SUBJECT_LABELS: Record<string, string> = {
   admissions: "Admissions Inquiry",
@@ -73,7 +73,7 @@ const contactCards = [
     glow: "#EAB308",
     content: (
       <p className="text-gray-600 text-sm leading-relaxed">
-        Monday \u2013 Saturday: 8:30 AM \u2013 1:30 PM
+        Monday &ndash; Saturday: 8:30 AM &ndash; 1:30 PM
         <br />
         <span className="text-red-500 font-medium">Sunday: Closed</span>
       </p>
@@ -117,7 +117,6 @@ export function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Build a clean, readable WhatsApp message
     const subjectLabel = SUBJECT_LABELS[formData.subject] ?? formData.subject;
     const waText = [
       "\ud83d\udcdd *New Enquiry - Mother Care Pre-School*",
@@ -134,11 +133,8 @@ export function Contact() {
     ].join("\n");
 
     const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waText)}`;
-
-    // Open WhatsApp in a new tab
     window.open(waUrl, "_blank", "noopener,noreferrer");
 
-    // Show success state and reset form
     setSubmitted(true);
     setFormData(emptyForm);
   };
@@ -151,7 +147,7 @@ export function Contact() {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Contact Us</h1>
             <p className="text-xl text-gray-700 leading-relaxed">
-              We\u2019d love to hear from you. Get in touch with us for any questions or inquiries
+              We would love to hear from you. Get in touch with us for any questions or inquiries
             </p>
           </div>
         </div>
@@ -162,7 +158,7 @@ export function Contact() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
 
-            {/* Left \u2013 info cards + map */}
+            {/* Left - info cards + map */}
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Get in Touch</h2>
               <div className="space-y-4 mb-8">
@@ -192,7 +188,7 @@ export function Contact() {
               </a>
             </div>
 
-            {/* Right \u2013 contact form */}
+            {/* Right - contact form */}
             <div>
               <div className="bg-gradient-to-br from-yellow-50 to-blue-50 rounded-3xl shadow-2xl p-8">
                 <h2 className="text-3xl font-bold text-gray-900 mb-2">Send Us a Message</h2>
@@ -206,7 +202,6 @@ export function Contact() {
                 </p>
 
                 {submitted ? (
-                  /* \u2500\u2500 Success state \u2500\u2500 */
                   <div className="flex flex-col items-center justify-center py-12 text-center gap-4">
                     <CheckCircle size={56} className="text-green-500" />
                     <h3 className="text-2xl font-bold text-gray-900">WhatsApp Opened!</h3>
@@ -222,7 +217,6 @@ export function Contact() {
                     </button>
                   </div>
                 ) : (
-                  /* \u2500\u2500 Form \u2500\u2500 */
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
                       <label className="block text-gray-700 font-medium mb-2">Your Name *</label>
