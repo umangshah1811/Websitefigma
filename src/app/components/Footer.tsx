@@ -1,12 +1,14 @@
 import { Link } from "react-router";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Clock, CalendarDays } from "lucide-react";
 import logo from "../../assets/logo.png";
 
 const mapsUrl =
   "https://www.google.com/maps/dir/?api=1&destination=108+Green+Aristo+Road+Canal+Road+Jahangir+Pura+Surat+Gujarat+395005";
+const EMAIL = "mothercare79ps@gmail.com";
+const PHONE = "+91 88660 23444";
 
-// ── Mobile-aware footer link: flashes green on tap via :active + touchstart ──
+// ── Mobile-aware footer link: flashes green on tap ──
 function FooterLink({ to, children }: { to: string; children: React.ReactNode }) {
   const [touched, setTouched] = useState(false);
   return (
@@ -52,9 +54,7 @@ function OpenNowBadge() {
 }
 
 export function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   const quickLinks = [
     { label: "Home",                   path: "/" },
@@ -87,12 +87,10 @@ export function Footer() {
         style={{ zIndex: 9999 }}
         className="fixed bottom-24 right-4 bg-[#0047FF] text-white p-3 rounded-full shadow-xl hover:bg-blue-700 active:scale-95 transition-all hover:scale-110"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
           fill="none" stroke="currentColor" strokeWidth="2.5"
           strokeLinecap="round" strokeLinejoin="round"
-          aria-hidden="true" style={{ pointerEvents: "none" }}
-        >
+          aria-hidden="true" style={{ pointerEvents: "none" }}>
           <polyline points="18 15 12 9 6 15" />
         </svg>
       </button>
@@ -122,7 +120,7 @@ export function Footer() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone size={14} className="flex-shrink-0 text-[#0047FF]" />
-                  <a href="tel:+918866023444" className="hover:text-[#00C853] active:text-[#00C853] transition-colors">+91 88660 23444</a>
+                  <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="hover:text-[#00C853] active:text-[#00C853] transition-colors">{PHONE}</a>
                 </div>
               </address>
               <div className="flex gap-3">
@@ -147,9 +145,7 @@ export function Footer() {
               <h3 className="font-bold text-gray-900 mb-4">Quick Links</h3>
               <ul className="space-y-2">
                 {quickLinks.map((l) => (
-                  <li key={l.path}>
-                    <FooterLink to={l.path}>{l.label}</FooterLink>
-                  </li>
+                  <li key={l.path}><FooterLink to={l.path}>{l.label}</FooterLink></li>
                 ))}
               </ul>
             </div>
@@ -188,30 +184,29 @@ export function Footer() {
               <ul className="space-y-3 mb-4">
                 <li className="flex items-center gap-2 text-sm">
                   <Phone size={14} className="text-[#0047FF] flex-shrink-0" />
-                  <a href="tel:+918866023444" className="text-gray-600 hover:text-[#0047FF] active:text-[#0047FF] transition-colors font-medium underline-offset-2 hover:underline">
-                    +91 88660 23444
+                  <a href={`tel:${PHONE.replace(/\s/g, "")}`}
+                    className="text-gray-600 hover:text-[#0047FF] active:text-[#0047FF] transition-colors font-medium underline-offset-2 hover:underline">
+                    {PHONE}
                   </a>
                 </li>
                 <li className="flex items-center gap-2 text-sm">
                   <Mail size={14} className="text-[#0047FF] flex-shrink-0" />
-                  <a href="mailto:info@mothercaresurat.in" className="text-gray-600 hover:text-[#0047FF] active:text-[#0047FF] transition-colors underline-offset-2 hover:underline">
-                    info@mothercaresurat.in
+                  <a href={`mailto:${EMAIL}`}
+                    className="text-gray-600 hover:text-[#0047FF] active:text-[#0047FF] transition-colors underline-offset-2 hover:underline break-all">
+                    {EMAIL}
                   </a>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <MapPin size={14} className="text-[#0047FF] flex-shrink-0 mt-0.5" />
-                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#0047FF] active:text-[#0047FF] transition-colors underline-offset-2 hover:underline">
+                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-[#0047FF] active:text-[#0047FF] transition-colors underline-offset-2 hover:underline">
                     108, Green Aristo Road, Canal Road, Jahangir Pura, Surat
                   </a>
                 </li>
               </ul>
-              <a
-                href={mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <a href={mapsUrl} target="_blank" rel="noopener noreferrer"
                 className="block rounded-[10px] overflow-hidden hover:opacity-90 transition-opacity"
-                aria-label="Get directions to Mother Care Pre-School"
-              >
+                aria-label="Get directions to Mother Care Pre-School">
                 <iframe
                   src="https://maps.google.com/maps?q=Mother+Care+Pre-School+Surat&output=embed"
                   width="100%" height="130" loading="lazy"
@@ -227,14 +222,13 @@ export function Footer() {
             <h3 className="text-xl font-semibold text-white mb-2">Ready to Join Our Family?</h3>
             <p className="text-blue-100 mb-4">Schedule a tour and see our school in action!</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                to="/admissions#tour"
-                className="inline-flex items-center justify-center gap-2 bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-[#FFD633] transition-all"
-              >
+              <Link to="/admissions#tour"
+                className="inline-flex items-center justify-center gap-2 bg-[#FFCC00] text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-[#FFD633] transition-all">
                 <CalendarDays size={16} style={{ pointerEvents: "none" }} />
                 Book a School Tour
               </Link>
-              <Link to="/admissions" className="bg-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition-all">
+              <Link to="/admissions"
+                className="bg-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition-all">
                 Apply for Admission
               </Link>
             </div>
