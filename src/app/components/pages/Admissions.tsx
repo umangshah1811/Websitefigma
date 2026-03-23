@@ -420,10 +420,10 @@ export function Admissions() {
                         className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#0047FF] focus:border-transparent"
                       >
                         <option value="">Select program</option>
-                        <option value="playgroup">Playgroup (1.5 - 2.5 years)</option>
-                        <option value="nursery">Nursery (2.5 - 3.5 years)</option>
-                        <option value="junior-kg">Junior KG (3.5 - 4.5 years)</option>
-                        <option value="senior-kg">Senior KG (4.5 - 5.5 years)</option>
+                        <option value="playgroup">Playgroup (2 - 3 years)</option>
+                        <option value="nursery">Nursery (3 - 4 years)</option>
+                        <option value="junior-kg">Junior KG (4 - 5 years)</option>
+                        <option value="senior-kg">Senior KG (5 - 6 years)</option>
                       </select>
                     </div>
                     <div className="md:col-span-2">
