@@ -5,12 +5,12 @@ import {
   Puzzle, GraduationCap, Users, Leaf, Shield, Handshake,
 } from "lucide-react";
 
-// ── Program data ────────────────────────────────────────────────────────────
+// ── Program data ────────────────────────────────────────────────────────────────────────────
 const programs = [
   {
     id: "playgroup",
     title: "Playgroup",
-    age: "1.5 - 2.5 years",
+    age: "2 - 3 years",
     description:
       "A gentle introduction to the school environment where little ones explore, play, and develop social skills through interactive activities.",
     icon: Heart,
@@ -26,7 +26,7 @@ const programs = [
   {
     id: "nursery",
     title: "Nursery",
-    age: "2.5 - 3.5 years",
+    age: "3 - 4 years",
     description:
       "Building foundational skills through structured play, creative activities, and early learning concepts in a nurturing environment.",
     icon: BookOpen,
@@ -42,7 +42,7 @@ const programs = [
   {
     id: "junior-kg",
     title: "Junior KG",
-    age: "3.5 - 4.5 years",
+    age: "4 - 5 years",
     description:
       "Developing cognitive abilities, fine motor skills, and pre-reading skills through engaging activities and structured curriculum.",
     icon: Palette,
@@ -58,7 +58,7 @@ const programs = [
   {
     id: "senior-kg",
     title: "Senior KG",
-    age: "4.5 - 5.5 years",
+    age: "5 - 6 years",
     description:
       "Preparing children for primary school with advanced learning concepts, problem-solving skills, and independence.",
     icon: Star,
@@ -73,53 +73,52 @@ const programs = [
   },
 ];
 
-// ── Feature data (What Makes Our Programs Special) ───────────────────────────
+// ── Feature data (What Makes Our Programs Special) ────────────────────────────────────────────────
 const features = [
   {
     icon: Puzzle,
     title: "Play-Based Learning",
     description: "Children learn best through play. Our curriculum integrates fun activities with educational objectives.",
-    accent: "#3B82F6",   // blue
+    accent: "#3B82F6",
     iconBg: "bg-blue-50",
   },
   {
     icon: GraduationCap,
     title: "Experienced Teachers",
     description: "Our qualified educators are trained in early childhood development and passionate about teaching.",
-    accent: "#8B5CF6",   // violet
+    accent: "#8B5CF6",
     iconBg: "bg-violet-50",
   },
   {
     icon: Users,
     title: "Small Class Sizes",
     description: "We maintain low student-teacher ratios to ensure personalized attention for each child.",
-    accent: "#EF4444",   // red
+    accent: "#EF4444",
     iconBg: "bg-red-50",
   },
   {
     icon: Leaf,
     title: "Holistic Development",
     description: "We focus on cognitive, physical, social, and emotional development for well-rounded growth.",
-    accent: "#22C55E",   // green
+    accent: "#22C55E",
     iconBg: "bg-green-50",
   },
   {
     icon: Shield,
     title: "Safe Environment",
     description: "Child-safe facilities with CCTV monitoring and strict safety protocols give parents peace of mind.",
-    accent: "#0047FF",   // brand blue
+    accent: "#0047FF",
     iconBg: "bg-blue-50",
   },
   {
     icon: Handshake,
     title: "Parent Partnership",
     description: "Regular communication and involvement keep parents informed about their child's progress.",
-    accent: "#F59E0B",   // amber
+    accent: "#F59E0B",
     iconBg: "bg-amber-50",
   },
 ];
 
-// ── Shared IntersectionObserver hook ─────────────────────────────────────────────────
 function useScrollHighlight(threshold = 0.6) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
@@ -139,7 +138,6 @@ function useScrollHighlight(threshold = 0.6) {
   return { ref, inView };
 }
 
-// ── ProgramCard ───────────────────────────────────────────────────────────────
 function ProgramCard({
   id, title, age, description, icon: Icon, colorClass, glowColor, highlights,
 }: (typeof programs)[0]) {
@@ -192,7 +190,6 @@ function ProgramCard({
   );
 }
 
-// ── FeatureCard ───────────────────────────────────────────────────────────────
 function FeatureCard({
   icon: Icon, title, description, accent, iconBg,
 }: (typeof features)[0]) {
@@ -215,21 +212,16 @@ function FeatureCard({
         transition: "all 0.3s ease",
       }}
     >
-      {/* Icon badge */}
       <div
         className={`${iconBg} w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0`}
         style={{ border: `1.5px solid ${accent}33` }}
       >
         <Icon size={22} style={{ color: accent, pointerEvents: "none" }} />
       </div>
-
-      {/* Text */}
       <div>
         <h3 className="font-bold text-base text-gray-900 mb-1.5">{title}</h3>
         <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
       </div>
-
-      {/* Decorative corner circle */}
       <div
         className="absolute -bottom-5 -right-5 w-16 h-16 rounded-full pointer-events-none"
         style={{ backgroundColor: accent + "0D" }}
@@ -238,7 +230,6 @@ function FeatureCard({
   );
 }
 
-// ── Page ─────────────────────────────────────────────────────────────────────────
 export function Programs() {
   return (
     <div>
@@ -269,8 +260,6 @@ export function Programs() {
       <section className="py-20 bg-gradient-to-br from-amber-50/60 via-white to-blue-50/60">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-
-            {/* Section header */}
             <div className="text-center mb-14">
               <p className="text-sm font-semibold text-[#0047FF] uppercase tracking-widest mb-2">Our Approach</p>
               <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
@@ -279,15 +268,12 @@ export function Programs() {
               <p className="text-gray-500 max-w-xl mx-auto text-base">
                 Everything we do is designed with your child's best growth in mind.
               </p>
-              {/* Decorative underline */}
               <div className="mt-4 flex items-center justify-center gap-2">
                 <div className="h-1 w-10 rounded-full bg-[#FFCC00]" />
                 <div className="h-1 w-24 rounded-full bg-[#0047FF]" />
                 <div className="h-1 w-10 rounded-full bg-[#FFCC00]" />
               </div>
             </div>
-
-            {/* Feature cards grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {features.map((f) => (
                 <FeatureCard key={f.title} {...f} />
