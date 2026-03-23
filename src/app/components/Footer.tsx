@@ -15,7 +15,7 @@ function OpenNowBadge() {
       const ist = new Date(utc + 5.5 * 60 * 60000);
       const day = ist.getDay();
       const mins = ist.getHours() * 60 + ist.getMinutes();
-      setIsOpen(day >= 1 && day <= 6 && mins >= 480 && mins < 840);
+      setIsOpen(day >= 1 && day <= 6 && mins >= 510 && mins < 810);
     };
     check();
     const id = setInterval(check, 60000);
@@ -50,12 +50,12 @@ export function Footer() {
   ];
 
   const schedule = [
-    { day: "Monday",    hours: "8:00 AM – 2:00 PM" },
-    { day: "Tuesday",   hours: "8:00 AM – 2:00 PM" },
-    { day: "Wednesday", hours: "8:00 AM – 2:00 PM" },
-    { day: "Thursday",  hours: "8:00 AM – 2:00 PM" },
-    { day: "Friday",    hours: "8:00 AM – 2:00 PM" },
-    { day: "Saturday",  hours: "8:00 AM – 2:00 PM" },
+    { day: "Monday",    hours: "8:30 AM – 1:30 PM" },
+    { day: "Tuesday",   hours: "8:30 AM – 1:30 PM" },
+    { day: "Wednesday", hours: "8:30 AM – 1:30 PM" },
+    { day: "Thursday",  hours: "8:30 AM – 1:30 PM" },
+    { day: "Friday",    hours: "8:30 AM – 1:30 PM" },
+    { day: "Saturday",  hours: "8:30 AM – 1:30 PM" },
     { day: "Sunday",    hours: "Closed" },
   ];
 
