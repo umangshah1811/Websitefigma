@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import {
   Heart, Target, Shield, GraduationCap, BookOpen, Quote,
-  CalendarDays, Users, Compass, BookMarked, Star, Lightbulb
+  CalendarDays, Users, Compass, BookMarked
 } from "lucide-react";
 import { Link } from "react-router";
 import logo from "../../../assets/logo.png";
+import founderImg from "../../../assets/founder.jpg";
 
 const teamImage = "https://images.unsplash.com/photo-1541802802036-1d572ba70147?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVzY2hvb2wlMjB0ZWFjaGVyJTIwY2hpbGRyZW4lMjByZWFkaW5nfGVufDF8fHx8MTc3MzUwMzcwN3ww&ixlib=rb-4.1.0&q=80&w=1080";
-const founderImage = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjB3b21hbiUyMHByaW5jaXBhbCUyMHNjaG9vbHxlbnwxfHx8fDE3NzM1MDM3MDd8MA&ixlib=rb-4.1.0&q=80&w=400";
 
 const storyStats = [
   { value: "15+",      label: "Years of Excellence",   sublabel: "Trusted Since 2011" },
@@ -15,7 +15,6 @@ const storyStats = [
   { value: "Holistic", label: "Development Approach",  sublabel: "Mind, Body & Soul" },
 ];
 
-// ─── Core Values data ─────────────────────────────────────────────────────────
 const coreValues = [
   {
     icon: Heart,
@@ -51,7 +50,6 @@ const coreValues = [
   },
 ];
 
-// ─── Why Choose Us data ───────────────────────────────────────────────────────
 const whyUs = [
   {
     icon: GraduationCap,
@@ -83,7 +81,6 @@ const whyUs = [
   },
 ];
 
-// ─── Count-up hook ────────────────────────────────────────────────────────────
 function useCountUp(target: number, duration = 1500) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -113,7 +110,6 @@ function useCountUp(target: number, duration = 1500) {
   return { count, ref };
 }
 
-// ─── Golden Stat Card ─────────────────────────────────────────────────────────
 function GoldenStatCard({ value, label, sublabel }: { value: string; label: string; sublabel: string }) {
   const numeric = parseInt(value.replace(/[^0-9]/g, ""), 10);
   const suffix = value.replace(/[0-9,]/g, "");
@@ -143,7 +139,6 @@ function GoldenStatCard({ value, label, sublabel }: { value: string; label: stri
   );
 }
 
-// ─── Value Card ───────────────────────────────────────────────────────────────
 function ValueCard({ icon: Icon, title, description, accent, bg, ring }: {
   icon: any; title: string; description: string; accent: string; bg: string; ring: string;
 }) {
@@ -160,7 +155,6 @@ function ValueCard({ icon: Icon, title, description, accent, bg, ring }: {
         transform: hovered ? "translateY(-5px)" : "translateY(0)",
       }}
     >
-      {/* Icon circle */}
       <div
         className="w-16 h-16 rounded-full flex items-center justify-center mb-5 flex-shrink-0 bg-white shadow-md"
         style={{ border: `2px solid ${accent}33` }}
@@ -169,7 +163,6 @@ function ValueCard({ icon: Icon, title, description, accent, bg, ring }: {
       </div>
       <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
       <p className="text-sm text-gray-600 leading-relaxed">{description}</p>
-      {/* Bottom accent line */}
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 h-1 rounded-b-2xl transition-all duration-300"
         style={{ width: hovered ? "60%" : "30%", backgroundColor: accent, opacity: 0.7 }}
@@ -178,7 +171,6 @@ function ValueCard({ icon: Icon, title, description, accent, bg, ring }: {
   );
 }
 
-// ─── Why Us Card ──────────────────────────────────────────────────────────────
 function WhyUsCard({ icon: Icon, title, description, accent, bg }: {
   icon: any; title: string; description: string; accent: string; bg: string;
 }) {
@@ -209,7 +201,6 @@ function WhyUsCard({ icon: Icon, title, description, accent, bg }: {
   );
 }
 
-// ─── Page Component ───────────────────────────────────────────────────────────
 export function About() {
   return (
     <div>
@@ -246,7 +237,7 @@ export function About() {
               <p className="text-lg text-gray-700 leading-relaxed">
                 Today, our 15-year legacy stands as a testament to our commitment, a legacy built on trust,
                 empathy, and the unwavering belief that early childhood education is the most critical period
-                for shaping a child's future.
+                for shaping a child&apos;s future.
               </p>
             </div>
             <div>
@@ -254,12 +245,22 @@ export function About() {
             </div>
           </div>
 
-          {/* Founder */}
+          {/* Founder section */}
           <div className="mt-16 bg-gradient-to-br from-amber-50 to-yellow-50 rounded-3xl border border-[#D4AF37]/40 p-8 md:p-12" style={{ boxShadow: "0 0 24px rgba(212,175,55,0.15)" }}>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
               <div className="md:col-span-2 flex flex-col items-center gap-4">
-                <div className="w-44 h-44 md:w-52 md:h-52 rounded-full overflow-hidden flex-shrink-0" style={{ border: "3px solid #D4AF37", boxShadow: "0 0 0 6px rgba(212,175,55,0.18), 0 8px 32px rgba(212,175,55,0.25)" }}>
-                  <img src={founderImage} alt="Mrs. Pooja Shah, Founder & Principal of Mother Care Pre-School Surat" className="w-full h-full object-cover" />
+                <div
+                  className="w-44 h-44 md:w-52 md:h-52 rounded-full overflow-hidden flex-shrink-0"
+                  style={{
+                    border: "3px solid #D4AF37",
+                    boxShadow: "0 0 0 6px rgba(212,175,55,0.18), 0 8px 32px rgba(212,175,55,0.25)",
+                  }}
+                >
+                  <img
+                    src={founderImg}
+                    alt="Mrs. Pooja Shah, Founder & Principal of Mother Care Pre-School Surat"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
                 <div className="text-center">
                   <p className="font-bold text-gray-900 text-lg">Mrs. Pooja Shah</p>
@@ -272,19 +273,22 @@ export function About() {
                   <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-snug">A Message from Our Founder</h2>
                 </div>
                 <p className="text-gray-700 leading-8 text-base md:text-lg" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
-                  "With over two decades of passion for early education, I established Mother Care with a
+                  &ldquo;With over two decades of passion for early education, I established Mother Care with a
                   simple mission: to treat every child with the same love, patience, and nurture as a mother.
                   Our school is not just a place of learning. It is a second home, a sanctuary where every
-                  child's curiosity is celebrated and every milestone is cherished."
+                  child&apos;s curiosity is celebrated and every milestone is cherished.&rdquo;
                 </p>
                 <p className="text-gray-600 leading-7 text-sm md:text-base">
                   Her vision has guided Mother Care Pre-School through{" "}
                   <strong>15 successful years</strong> of shaping young minds in Surat, creating a legacy
                   built on empathy, trust, and a deep belief that every child deserves the best possible start.
                 </p>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold bg-white border border-[#D4AF37] text-[#B8860B]" style={{ boxShadow: "0 0 10px rgba(212,175,55,0.20)" }}>
+                <div
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold bg-white border border-[#D4AF37] text-[#B8860B]"
+                  style={{ boxShadow: "0 0 10px rgba(212,175,55,0.20)" }}
+                >
                   <img src={logo} alt="" className="w-5 h-5 rounded-full object-contain" />
-                  Mother Care Pre-School, Surat · Est. 2011
+                  Mother Care Pre-School, Surat &middot; Est. 2011
                 </div>
               </div>
             </div>
@@ -299,19 +303,15 @@ export function About() {
         </div>
       </section>
 
-      {/* ── Mission & Vision ─────────────────────────────────────────────────── */}
+      {/* Mission & Vision */}
       <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-indigo-50">
         <div className="container mx-auto px-4">
-          {/* Section header */}
           <div className="text-center mb-12">
             <p className="text-sm font-semibold text-[#0047FF] uppercase tracking-widest mb-2">Our Purpose</p>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Mission &amp; Vision</h2>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Mission card */}
             <div className="group relative bg-white rounded-3xl border border-blue-100 p-8 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-              {/* Decorative arc */}
               <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-blue-500/8 pointer-events-none" />
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-500 text-white mb-6 shadow-lg">
                 <Target size={28} style={{ pointerEvents: "none" }} />
@@ -319,13 +319,11 @@ export function About() {
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Our Mission</h3>
               <p className="text-gray-600 leading-relaxed text-[15px]">
                 We provide a safe, nurturing, and inspiring environment where children learn through play,
-                exploration, and guided activities. Our mission is to support every child's early development
+                exploration, and guided activities. Our mission is to support every child&apos;s early development
                 by building confidence, curiosity, creativity, and strong social skills.
               </p>
               <div className="mt-6 h-1 w-12 rounded-full bg-blue-500 group-hover:w-24 transition-all duration-500" />
             </div>
-
-            {/* Vision card */}
             <div className="group relative bg-white rounded-3xl border border-amber-100 p-8 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
               <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-amber-400/8 pointer-events-none" />
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-400 text-white mb-6 shadow-lg">
@@ -343,7 +341,7 @@ export function About() {
         </div>
       </section>
 
-      {/* ── Core Values ──────────────────────────────────────────────────────── */}
+      {/* Core Values */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -359,7 +357,7 @@ export function About() {
         </div>
       </section>
 
-      {/* ── Why Choose Us ────────────────────────────────────────────────────── */}
+      {/* Why Choose Us */}
       <section className="py-16 bg-gradient-to-br from-slate-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
