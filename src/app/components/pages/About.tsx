@@ -1,1 +1,1 @@
-about_tsx_placeholder_will_be_replaced
+about_tsx_placeholder_will_be_replaced_with_real_content
