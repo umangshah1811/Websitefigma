@@ -8,6 +8,7 @@ import { Admissions } from "./components/pages/Admissions";
 import { Events } from "./components/pages/Events";
 import { Gallery } from "./components/pages/Gallery";
 import { Blog } from "./components/pages/Blog";
+import { BlogPost } from "./components/pages/BlogPost";
 import { Contact } from "./components/pages/Contact";
 import { ParentPortal } from "./components/pages/ParentPortal";
 import { Payment } from "./components/pages/Payment";
@@ -26,6 +27,7 @@ export const router = createBrowserRouter([
       { path: "events", Component: Events },
       { path: "gallery", Component: Gallery },
       { path: "blog", Component: Blog },
+      { path: "blog/:slug", Component: BlogPost },
       { path: "contact", Component: Contact },
       { path: "parent-portal", Component: ParentPortal },
       { path: "payment", Component: Payment },
